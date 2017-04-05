@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+// Not gonna use this for the project
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;

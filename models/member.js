@@ -4,28 +4,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const memberSchema = new Schema({
-    name: {
-      type: String,
-      required: true
-    },
-    dateOfBirth: {
-      type: Date
-    },
-    phone: {
-      phoneNumber: {
-        type: Number
-      },
-      textCapable: {
-        type: Boolean,
-        default: true
-      },
-      email: {
-        type: String
-      },
-      picture: {
-        type: String
-      }
-    }
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  dateOfBirth: { type: Date },
+  phone: {
+    phoneNumber: { type: Number },
+    textCapable: { type: Boolean, default: true },
+  },
+  email: { type: String },
+  address: {
+    streetOne: { type: String },
+    streetTwo: { type: String },
+    city: { type: String },
+    state: { type: String },
+    zip: { type: String }
+  },
+  picture: { type: String }
 });
 
 // Make the model, call it driver, pass in the Schema

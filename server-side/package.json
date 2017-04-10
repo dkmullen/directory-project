@@ -1,5 +1,5 @@
 {
-  "name": "directory_project",
+  "name": "directory_project_server_side",
   "version": "1.0.0",
   "description": "Project for Coursera Full-Stack program",
   "main": "index.js",
@@ -9,9 +9,7 @@
   "author": "Dennis Mullen",
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.6.3",
     "body-parser": "^1.17.1",
-    "bootstrap": "^3.3.7",
     "express": "^4.15.2",
     "mocha": "^3.2.0",
     "mongoose": "^4.9.2",

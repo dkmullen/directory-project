@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="directory">
 <head>
   <meta charset="utf-8" />
   <title>Directory Project</title>
@@ -10,8 +10,21 @@
 </head>
 
 <body>
+  <div ng-controller="MemberListController as directory">
+    <h1>{{directory.member.firstName}} {{directory.member.lastName}}</h1>
+    <p>{{directory.member.email}}</p>
+    <p>{{directory.member.phone.phoneNumber}}
+      <button>Call</button> <button ng-show="directory.member.phone.textCapable">Text</button></p>
 
-  <script src="node_modules/angular/angular.min.js"></script>  
+    <p>{{directory.member.address.streetOne}}<br />
+       {{directory.member.address.streetTwo}}<br />
+       {{directory.member.address.city}} {{directory.member.address.state}}  {{directory.member.address.zip}}
+
+    </p>
+  </div>
+
+  <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+  <script type="text/javascript" src="scripts/app.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,13 @@
+<div>
+  <img ng-src={{member.picture}} alt={{member.firstName}} />
+  <h1>{{member.firstName}} {{member.lastName}}</h1>
+  <p>{{member.address.streetOne}}<br />
+     {{member.address.streetTwo}}<br />
+     {{member.address.city}}, {{member.address.state}}  {{member.address.zip}}
+  </p>
+  <p>{{member.email}}</p>
+  <p>{{member.phone.phoneNumber}}
+    <button>Call</button> <button ng-show="member.phone.textCapable">Text</button>
+  </p>
+
+</div>

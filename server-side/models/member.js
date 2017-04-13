@@ -19,7 +19,10 @@ const memberSchema = new Schema({
     state: { type: String },
     zip: { type: String }
   },
-  picture: { type: String }
+  image: {
+     full: {type: String },
+     thumb: { type: String}
+  }
 });
 
 // Make the model, call it driver, pass in the Schema

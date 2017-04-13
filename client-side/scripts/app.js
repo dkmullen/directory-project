@@ -1,28 +1,20 @@
 /*jshint esversion: 6 */
+
 (function() {
-  const app = angular.module('directory', []);
+  var app = angular.module('directory', []);
+  var baseUrl = 'http://localhost:3050';
 
-  app.controller('MemberListController', function() {
-    this.member = joe;
-  });
+  app.controller('MemberListController', [ '$http', function($http) {
+    var directory = this;
+    directory.members = [];
 
-  const joe = {
-    "firstName": "Joe",
-    "lastName": "Charboneau",
-    "dateOfBirth": null,
-    "phone": {
-      "phoneNumber": 8655555555,
-      "textCapable": true
-    },
-    "email": "joe@joe.com",
-    "address": {
-      "streetOne": "6 Rustic Drive",
-      "streetTwo": null,
-      "city": "Killbuck",
-      "state": "CO",
-      "zip": "88858"
-    },
-    "picture": "../img/joe.jpg"
-  };
-
+    $http.get(baseUrl + '/members/58f005045a8f401295742472')
+      .then(function(data){
+        directory.members = data;
+        console.log(directory.members);
+      })
+      .catch(function(err){
+        console.log('You got knocked the F out, man!');
+      });
+  }]);
 })();

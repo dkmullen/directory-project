@@ -10,16 +10,16 @@
 </head>
 
 <body ng-controller="MemberListController as directory">
-  <div ng-repeat="member in directory.members | orderBy: 'lastName' | limitTo: 3">
-    <img ng-src={{member.image.full}} alt={{member.firstName}} />
-    <h1>{{member.firstName}} {{member.lastName}}</h1>
-    <p>{{member.address.streetOne}}<br />
-       {{member.address.streetTwo}}<br />
-       {{member.address.city}}, {{member.address.state}}  {{member.address.zip}}
+  <div>
+    <img ng-src={{directory.members.data.image.full}} alt={{directory.members.data.firstName}} />
+    <h1>{{directory.members.data.firstName}} {{directory.members.data.lastName}}</h1>
+    <p>{{directory.members.data.address.streetOne}}<br />
+       {{directory.members.data.address.streetTwo}}<br />
+       {{directory.members.data.address.city}}, {{directory.members.data.address.state}}  {{directory.members.data.address.zip}}
     </p>
-    <p>{{member.email}}</p>
-    <p>{{member.phone.phoneNumber}}
-      <button>Call</button> <button ng-show="member.phone.textCapable">Text</button>
+    <p>{{directory.members.data.email}}</p>
+    <p>{{directory.members.data.phone.phoneNumber}}
+      <button>Call</button> <button ng-show="directory.members.data.phone.textCapable">Text</button>
     </p>
 
   </div>

@@ -9,15 +9,11 @@
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 
-<body ng-controller="MemberListController as directory">
-  <div ng-repeat="member in directory.members.data | orderBy: 'lastName'">
-    <a ng-href="temp.html">
-      <img ng-src={{member.image.thumb}} alt={{member.firstName}} />
-      <h3>{{member.firstName}} {{member.lastName}}</h3>
-    </a>
-  </div>
+<body>
+  <a href="index.html">Go back</a>
 
   <script type="text/javascript" src="node_modules/angular/angular.js"></script>
   <script type="text/javascript" src="scripts/app.js"></script>
 </body>
+
 </html>

@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" ng-app="directory">
+<html lang="en" ng-app="directoryApp">
 <head>
   <meta charset="utf-8" />
   <title>Directory Project</title>
   <meta name="description" content="Directory Project for Coursera Full-Stack Program" />
   <meta name="author" content="Dennis Mullen" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 
 <body ng-controller="MemberRecordController as individual">
@@ -20,11 +20,11 @@
     <p><a href="mailto:{{individual.member.data.email}}">{{individual.member.data.email}}</a></p>
     <p><a href="tel:+{{individual.member.data.phone.phoneNumber}}">{{individual.member.data.phone.phoneNumber}}</a>
       <button>Call</button> <button ng-show="individual.member.data.phone.textCapable">Text</button>
-    </p>
+    </p><button ng-click="individual.test()">Hmmm</button>
     <button onclick="location.href='index.html'">Return to List</button>
   </div>
 
-  <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+  <script type="text/javascript" src="../node_modules/angular/angular.js"></script>
   <script type="text/javascript" src="scripts/app.js"></script>
 </body>
 

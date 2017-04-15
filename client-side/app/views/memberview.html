@@ -1,0 +1,13 @@
+<div ng-controller="MemberRecordController as individual">
+  <img ng-src={{individual.member.data.image.full}} alt={{individual.member.data.firstName}} />
+  <h1>{{individual.member.data.firstName}} {{individual.member.data.lastName}}</h1>
+  <p>{{individual.member.data.address.streetOne}}<br />
+     {{individual.member.data.address.streetTwo}}<br />
+     {{individual.member.data.address.city}}, {{individual.member.data.address.state}}  {{individual.member.data.address.zip}}
+  </p>
+  <p><a href="mailto:{{individual.member.data.email}}">{{individual.member.data.email}}</a></p>
+  <p><a href="tel:+{{individual.member.data.phone.phoneNumber}}">{{individual.member.data.phone.phoneNumber}}</a>
+    <button>Call</button> <button ng-show="individual.member.data.phone.textCapable">Text</button>
+  </p><button ng-click="individual.test()">Hmmm</button>
+  <button onclick="location.href='index.html'">Return to List</button>
+</div>

@@ -1,10 +1,14 @@
 /*jshint esversion: 6 */
 
 (function() {
-  const app = angular.module('directory', []);
+  const app = angular.module('directoryApp', []);
   const baseUrl = 'http://localhost:3050';
 
   app.controller('MemberListController', [ '$http', function($http) {
+    this.test = function(id) {
+      console.log(id);
+    };
+
     let directory = this;
     directory.members = [];
 
@@ -21,7 +25,7 @@
     let record = this;
     record.member = [];
 
-    $http.get(baseUrl + '/members/58f005045a8f401295742474')
+    $http.get(baseUrl + '/members/58f005045a8f401295742470')
       .then((data) => {
         record.member = data;
         console.log(record.member.data.firstName);
@@ -30,4 +34,5 @@
         console.log('You got knocked the F out, man!');
       });
   }]);
+
 })();

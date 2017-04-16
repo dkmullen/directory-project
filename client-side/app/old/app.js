@@ -1,10 +1,14 @@
 /*jshint esversion: 6 */
 
 (function() {
+  const app = angular.module('directoryApp', []);
   const baseUrl = 'http://localhost:3050';
-  angular.module('directoryApp') // this only retrieves the module, created in app.js
 
-  .controller('MemberListController', [ '$http', function($http) {
+  app.controller('MemberListController', [ '$http', function($http) {
+    this.test = function(id) {
+      console.log(id);
+    };
+
     let directory = this;
     directory.members = [];
 
@@ -15,13 +19,13 @@
       .catch((err) => {
         console.log('You got knocked the F out, man!');
       });
-  }])
+  }]);
 
-  .controller('MemberRecordController', [ '$http', function($http) {
+  app.controller('MemberRecordController', [ '$http', function($http) {
     let record = this;
     record.member = [];
 
-    $http.get(baseUrl + '/members/' + _id)
+    $http.get(baseUrl + '/members/58f005045a8f401295742470')
       .then((data) => {
         record.member = data;
         console.log(record.member.data.firstName);
@@ -30,6 +34,5 @@
         console.log('You got knocked the F out, man!');
       });
   }]);
-        console.log('controllers');
+
 })();
-// 58f005045a8f401295742470

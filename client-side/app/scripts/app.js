@@ -1,38 +1,35 @@
 /*jshint esversion: 6 */
+angular.module('directoryApp', ['ui.router'])
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
 
-(function() {
-  const app = angular.module('directoryApp', []);
-  const baseUrl = 'http://localhost:3050';
+  .state('main', {
+    url: '/',
+    views: {
+      'header': {
+        templateUrl : 'views/header.html'
+      },
+      'content': {
+        templateUrl : 'views/home.html',
+        controller  : 'MemberListController'
+      },
+      'footer': {
+        templateUrl : 'views/footer.html',
+      }
+    }
+  })
 
-  app.controller('MemberListController', [ '$http', function($http) {
-    this.test = function(id) {
-      console.log(id);
-    };
+  // route for the member record page
+  .state('details', {
+    url:'members/:id',
+    views: {
+      'content@': {
+        templateUrl : 'views/detail.html',
+        controller  : 'MemberRecordController'
+      }
+    }
+  });
 
-    let directory = this;
-    directory.members = [];
-
-    $http.get(baseUrl + '/members')
-      .then((data) => {
-        directory.members = data;
-      })
-      .catch((err) => {
-        console.log('You got knocked the F out, man!');
-      });
-  }]);
-
-  app.controller('MemberRecordController', [ '$http', function($http) {
-    let record = this;
-    record.member = [];
-
-    $http.get(baseUrl + '/members/58f005045a8f401295742470')
-      .then((data) => {
-        record.member = data;
-        console.log(record.member.data.firstName);
-      })
-      .catch((err) => {
-        console.log('You got knocked the F out, man!');
-      });
-  }]);
-
-})();
+  $urlRouterProvider.otherwise('/');
+});
+console.log('app2.js');

@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-angular.module('directoryApp', ['ui.router'])
+angular.module('directoryApp', ['ui.router', 'ngResource'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
@@ -32,4 +32,3 @@ angular.module('directoryApp', ['ui.router'])
 
   $urlRouterProvider.otherwise('/');
 });
-console.log('app2.js');

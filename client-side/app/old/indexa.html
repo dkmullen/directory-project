@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 
-<body ng-controller="MemberListController as directory">
-  <div ng-repeat="member in directory.members.data | orderBy: 'lastName'">
+<body >
+  <div ng-controller="MemberListController as directory" ng-repeat="member in directory.members.data | orderBy: 'lastName'">
       <a href="members/{{member._id}}">
       <img ng-src={{member.image.thumb}} alt={{member.firstName}} />
       <h3>{{member.firstName}} {{member.lastName}}</h3>

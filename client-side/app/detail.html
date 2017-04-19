@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 
-<body>
+<body ng-controller="MemberRecordController as individual">
+  <div ui-view="header"></div>
   <div ng-controller="MemberRecordController as individual">
     <img ng-src={{individual.member.data.image.full}} alt={{individual.member.data.firstName}} />
     <h1>{{individual.member.data.firstName}} {{individual.member.data.lastName}}</h1>
@@ -23,8 +24,11 @@
     </p><button ng-click="individual.test()">Hmmm</button>
     <button onclick="location.href='index.html'">Return to List</button>
   </div>
+  <div ui-view="footer"></div>
 
   <script type="text/javascript" src="../node_modules/angular/angular.js"></script>
+  <script type="text/javascript" src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+
   <script type="text/javascript" src="scripts/app.js"></script>
 </body>
 

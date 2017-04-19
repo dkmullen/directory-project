@@ -10,14 +10,13 @@
 </head>
 
 <body ng-controller="MemberListController as directory">
-  <div ng-repeat="member in directory.members.data | orderBy: 'lastName'">
-      <a href="members/{{member._id}}">
-      <img ng-src={{member.image.thumb}} alt={{member.firstName}} />
-      <h3>{{member.firstName}} {{member.lastName}}</h3>
-    </a>
-  </div>
+
+  <div ui-view="header"></div>
+  <div ui-view="content">  </div>
+  <div ui-view="footer"></div>
 
   <script type="text/javascript" src="../node_modules/angular/angular.js"></script>
+  <script type="text/javascript" src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script type="text/javascript" src="scripts/app.js"></script>
 
 </body>

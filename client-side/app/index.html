@@ -1,5 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="en" >
+<!doctype html>
+<html lang="en" ng-app="directoryApp">
 <head>
   <meta charset="utf-8" />
   <title>Directory Project</title>
@@ -9,19 +9,16 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 
-<body ng-app="directoryApp">
-
-  <div ui-view="header"></div>
-  <div ui-view="content"></div>
-  <div ui-view="footer"></div>
-
-  <ng-include src="views.home.html"></ng-include>
+<body ng-controller="MemberListController as directory">
+  <div ng-repeat="member in directory.members.data | orderBy: 'lastName'">
+      <a href="members/{{member._id}}">
+      <img ng-src={{member.image.thumb}} alt={{member.firstName}} />
+      <h3>{{member.firstName}} {{member.lastName}}</h3>
+    </a>
+  </div>
 
   <script type="text/javascript" src="../node_modules/angular/angular.js"></script>
-  <script type="text/javascript" src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script type="text/javascript" src="../node_modules/angular-resource/angular-resource.min.js"></script>
   <script type="text/javascript" src="scripts/app.js"></script>
-  <script type="text/javascript" src="scripts/controllers.js"></script>
-  <script type="text/javascript" src="scripts/services.js"></script>
+
 </body>
 </html>

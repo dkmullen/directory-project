@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 
-<body ng-controller="MemberRecordController as individual">
-  <div>
+<body>
+  <div ng-controller="MemberRecordController as individual">
     <img ng-src={{individual.member.data.image.full}} alt={{individual.member.data.firstName}} />
     <h1>{{individual.member.data.firstName}} {{individual.member.data.lastName}}</h1>
     <p>{{individual.member.data.address.streetOne}}<br />

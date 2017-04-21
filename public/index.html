@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" ng-app="directoryApp">
+<head>
+  <meta charset="utf-8" />
+  <title>Directory Project</title>
+  <meta name="description" content="Directory Project for Coursera Full-Stack Program" />
+  <meta name="author" content="Dennis Mullen" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="stylesheets/bootstrap.min.css" />
+</head>
+
+<body ng-controller="MemberListController as directory">
+
+  <div ui-view="header"></div>
+  <div ui-view="content">  </div>
+  <div ui-view="footer"></div>
+
+  <script type="text/javascript" src="javascripts/angular.min.js"></script>
+  <script type="text/javascript" src="javascripts/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="javascripts/app.js"></script>
+  <script type="text/javascript" src="javascripts/controllers.js"></script>
+
+
+</body>
+</html>

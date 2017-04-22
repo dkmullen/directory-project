@@ -16,11 +16,12 @@
       });
   }])
 
-  .controller('MemberRecordController', [ '$http', function($http) {
+  .controller('MemberRecordController', [ '$http', '$scope', '$stateParams', function($http, $scope, $stateParams) {
     let record = this;
     record.member = [];
+    $scope.id = $stateParams.id;
 
-    $http.get('/members/:id')
+    $http.get('/members/' + $scope.id)
       .then((data) => {
         record.member = data;
       })

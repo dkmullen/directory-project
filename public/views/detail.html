@@ -8,6 +8,5 @@
   <p><a href="mailto:{{individual.member.data.email}}">{{individual.member.data.email}}</a></p>
   <p><a href="tel:+{{individual.member.data.phone.phoneNumber}}">{{individual.member.data.phone.phoneNumber}}</a>
     <button>Call</button> <button ng-show="individual.member.data.phone.textCapable">Text</button>
-  </p><button ng-click="individual.test()">Hmmm</button>
-  <button onclick="location.href='index.html'">Return to List</button>
+    <button ng-click="{active: stateis('main')}"><a ui-sref="main">Return to List</button>
 </div>

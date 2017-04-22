@@ -12,7 +12,8 @@
           templateUrl: '/views/header.html'
         },
         'content': {
-          templateUrl: '/views/home.html'
+          templateUrl: '/views/home.html',
+          controller: 'MemberListController'
         },
         'footer': {
           templateUrl: '/views/footer.html'
@@ -21,13 +22,14 @@
     })
 
     .state('detail', {
-      url: '/',
+      url: '/member:id',
       views: {
         'header': {
           templateUrl: '/views/header.html'
         },
         'content': {
-          templateUrl: '/views/detail.html'
+          templateUrl: '/views/detail.html',
+          controller: 'MemberRecordController'
         },
         'footer': {
           templateUrl: '/views/footer.html'

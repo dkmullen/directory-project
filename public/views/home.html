@@ -1,6 +1,8 @@
-<div ng-repeat="member in directory.members.data | orderBy: 'lastName'">
-  <a href="members/{{member._id}}">
-    <img ng-src={{member.image.thumb}} alt={{member.firstName}} />
-    <h3>{{member.firstName}} {{member.lastName}}</h3>
-  </a>
+<div ng-controller="MemberListController as directory">
+  <div ng-repeat="member in directory.members.data | orderBy: 'lastName'">
+    <div ng-class="{active: stateis('detail')}"><a ui-sref="detail({id: member._id})">
+      <img ng-src={{member.image.thumb}} alt={{member.firstName}} />
+      <h3>{{member.firstName}} {{member.lastName}}</h3>
+    </a></div>
+  </div>
 </div>

@@ -16,21 +16,39 @@
       });
   }])
 
-  .controller('MemberRecordController', [ '$http', '$scope', '$stateParams', function($http, $scope, $stateParams) {
-    let record = this;
-    record.member = [];
-    $scope.id = $stateParams.id;
+  .controller('MemberRecordController', [ '$http', '$scope', '$stateParams',
+    function($http, $scope, $stateParams) {
+      let record = this;
+      record.member = [];
+      $scope.id = $stateParams.id;
 
-    $http.get('/members/' + $scope.id)
-      .then((data) => {
-        record.member = data;
-      })
-      .catch((err) => {
-        console.log('You got knocked the F out, man!');
-      });
-      this.test = function(id) {
-        console.log(record.member.data._id);
-      };
-  }]);
+      $http.get('/members/' + $scope.id)
+        .then((data) => {
+          record.member = data;
+        })
+        .catch((err) => {
+          console.log('You got knocked the F out, man!');
+        });
+    }])
+
+    .controller('PostNewRecordController', [ '$http', '$scope', function($http, $scope) {
+        $scope.newRecord = {};
+
+        $scope.saveNewRecord = function() {
+          $http({
+            method: 'POST',
+            url: '/members',
+            data: $scope.newRecord,
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+          })
+          .then((data) => {
+            alert('Got it');
+          })
+          .catch((err) => {
+            console.log('You got knocked the F out, man!');
+          });
+          //  alert('Hey now!');
+        };
+      }]);
 
 })();

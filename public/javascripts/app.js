@@ -35,6 +35,22 @@
           templateUrl: '/views/footer.html'
         }
       }
+    })
+
+    .state('addnew', {
+      url: '/add',
+      views: {
+        'header': {
+          templateUrl: '/views/header.html'
+        },
+        'content': {
+          templateUrl: '/views/add-record.html',
+          controller: 'PostNewRecordController'
+        },
+        'footer': {
+          templateUrl: '/views/footer.html'
+        }
+      }
     });
 
     $urlRouterProvider.otherwise('/');

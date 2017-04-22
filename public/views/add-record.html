@@ -1,0 +1,28 @@
+<div ng-controller="PostNewRecordController">
+  <form ng-submit="saveNewRecord()">
+    <label for="firstName">First Name:</label>
+    <input type="text" id= "firstName" name="firstName" ng-model="member.firstName" required/><br />
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" ng-model="member.lastName"/><br />
+
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input type="date" id="dateOfBirth" name="dateOfBirth" ng-model="member.dateOfBirth"/><br />
+
+    <label for="phoneNumber">Phone:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber" ng-model="member.phone.phoneNumber"/><br />
+
+    Do you receive texts at this number?<br />
+    <label for="text-yes">Yes:</label><input type="radio" id="text-yes" name="textCapable" value="true" />
+    <label for="text-no">No:</label><input type="radio" id="text-no" name="textCapable" value="false" /><br />
+
+    <label for="streetOne">Address:</label><br />
+    <input type="text" id="streetOne" name="streetOne" placeholder="Line 1"/><br />
+    <input type="text" name="streetTwo" placeholder="Line 2"/><br />
+    <input type="text" name="city" placeholder="city"/><input type="text" name="state" placeholder="ST"/><input type="text" name="zip" placeholder="zip"/><br />
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+
+<button ui-sref="main">Return to List</button>

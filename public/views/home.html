@@ -1,3 +1,4 @@
+<button ui-sref="addnew">Add a new record</button>
 <div ng-controller="MemberListController as directory">
   <div ng-repeat="member in directory.members.data | orderBy: 'lastName'">
     <div ng-class="{active: stateis('detail')}"><a ui-sref="detail({id: member._id})">

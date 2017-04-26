@@ -31,24 +31,27 @@
         });
     }])
 
-    .controller('PostNewRecordController', [ '$http', '$scope', function($http, $scope) {
-        $scope.newRecord = {};
+    .controller('PostNewRecordController', [ '$scope', '$http', function($scope, $http) {
+        $scope.newRecord =
+          {"firstName": "Not so Handsome",
+          "lastName": "Jim"
+          };
 
         $scope.saveNewRecord = function() {
           $http({
             method: 'POST',
-            url: '/members',
+            url: 'members',
             data: $scope.newRecord,
-            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers : { 'Content-Type': 'application/json' }
           })
           .then((data) => {
             alert('Got it');
           })
           .catch((err) => {
             console.log('You got knocked the F out, man!');
+            console.log($scope.newRecord);
           });
-          //  alert('Hey now!');
         };
-      }]);
+    }]);
 
 })();

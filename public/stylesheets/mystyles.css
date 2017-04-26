@@ -1,0 +1,17 @@
+body {
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  color: rgb(59, 59, 59);
+}
+#grid-pix {
+  display: inline-block;
+  margin: 5px 5px 15px 5px;
+}
+a, a:hover {
+  color: rgb(59, 59, 59);
+}
+header {
+  margin: 25px 50px;
+}

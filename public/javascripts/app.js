@@ -51,6 +51,21 @@
           templateUrl: '/views/footer.html'
         }
       }
+    })
+
+    .state('about', {
+      url: '/about',
+      views: {
+        'header': {
+          templateUrl: '/views/header.html'
+        },
+        'content': {
+          templateUrl: '/views/about.html',
+        },
+        'footer': {
+          templateUrl: '/views/footer.html'
+        }
+      }
     });
 
     $urlRouterProvider.otherwise('/');

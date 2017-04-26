@@ -1,16 +1,16 @@
 <div ng-controller="PostNewRecordController">
   <form ng-submit="saveNewRecord()">
     <label for="firstName">First Name:</label>
-    <input type="text" id= "firstName" name="firstName" ng-model="member.firstName" required/><br />
+    <input type="text" id= "firstName" name="firstName" ng-model="Member.firstName" /><br />
 
     <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" ng-model="member.lastName"/><br />
+    <input type="text" id="lastName" name="lastName" ng-model="Member.lastName"/><br />
 
     <label for="dateOfBirth">Date of Birth:</label>
-    <input type="date" id="dateOfBirth" name="dateOfBirth" ng-model="member.dateOfBirth"/><br />
+    <input type="date" id="dateOfBirth" name="dateOfBirth" ng-model="Member.dateOfBirth"/><br />
 
     <label for="phoneNumber">Phone:</label>
-    <input type="tel" id="phoneNumber" name="phoneNumber" ng-model="member.phone.phoneNumber"/><br />
+    <input type="tel" id="phoneNumber" name="phoneNumber" ng-model="Member.phone.phoneNumber"/><br />
 
     Do you receive texts at this number?<br />
     <label for="text-yes">Yes:</label><input type="radio" id="text-yes" name="textCapable" value="true" />

@@ -2,7 +2,7 @@
   <img ng-src={{individual.member.data.image.full}} alt={{individual.member.data.firstName}} />
   <h1>{{individual.member.data.firstName}} {{individual.member.data.lastName}}</h1>
   <p>{{individual.member.data.address.streetOne}}<br />
-     {{individual.member.data.address.streetTwo}}<br />
+     <span ng-show="{{individual.member.data.address.streetTwo}}"></span>
      {{individual.member.data.address.city}}, {{individual.member.data.address.state}}  {{individual.member.data.address.zip}}
   </p>
   <p><a href="mailto:{{individual.member.data.email}}">{{individual.member.data.email}}</a></p>

@@ -10,7 +10,7 @@ body {
   margin: 5px 5px 25px 5px;
 }
 a, a:hover {
-  color: rgb(116, 106, 100);
+  color: rgb(249, 109, 22);
 }
 #container {
   text-align: center;
@@ -18,17 +18,22 @@ a, a:hover {
 header {
   margin: 25px 50px;
 }
-.active {
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
   background-color: rgb(249, 109, 22);
 }
-.detail-page-image, .placeholder-image {
+.detail-page-image, .placeholder-image, .about-image {
   margin: 0 50px;
 }
 .info-form {
   text-align: center;
 }
+#who-we-are-headline {
+  margin-top: -5px;
+}
 /*
-Globe graphic by <a href="http://www.flaticon.com/authors/freepik">Freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>
+
 
 https://dummyimage.com/
 

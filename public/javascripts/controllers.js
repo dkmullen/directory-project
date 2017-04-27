@@ -52,6 +52,12 @@
             console.log($scope.newRecord);
           });
         };
+    }])
+
+    .controller('NavController', ['$scope', '$state', function($scope, $state) {
+      $scope.stateis = function(currentState) {
+       return $state.is(currentState);
+      };
     }]);
 
 })();

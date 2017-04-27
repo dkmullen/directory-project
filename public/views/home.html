@@ -1,15 +1,10 @@
-<!-- Stack the columns on mobile by making one full-width and the other half-width -->
 <div class="row">
-    <div ng-controller="MemberListController as directory">
-      <div id="grid-pix" ng-repeat="member in directory.members.data | orderBy: 'lastName'">
-        <div ng-class="{active: stateis('detail')}"><a ui-sref="detail({id: member._id})">
-          <img ng-src={{member.image.thumb}} alt={{member.firstName}} />
-          <h3>{{member.firstName}} {{member.lastName}}</h3>
-        </a></div>
-      </div>
+  <div id="container" ng-controller="MemberListController as directory">
+    <div id="grid-pix" ng-repeat="member in directory.members.data | orderBy: 'lastName'">
+      <div><a ui-sref="detail({id: member._id})">
+        <img ng-src={{member.image.thumb}} alt={{member.firstName}} />
+        <h3>{{member.firstName}} {{member.lastName}}</h3>
+      </a></div>
     </div>
-
-
+  </div>
 </div>
-
-<button ui-sref="addnew">Add a new record</button>

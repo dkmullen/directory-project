@@ -1,6 +1,14 @@
 <header>
-  <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">Home</a></li>
-    <li role="presentation"><a href ui-sref="addnew">Add or Modify Your Record</a></li>
-    <li role="presentation"><a href ui-sref="about">About Us</a></li>
-  </ul></header>
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <a href ui-sref="main"><img src="../resources/app_logo.png" alt="logo"></a>
+    </div>
+    <div class="col-xs-12 col-md-8">
+      <ul class="nav nav-pills orange" role="navigation">
+        <li ng-class="{active: stateis('main')}"><a href ui-sref="main">Home</a></li>
+        <li ng-class="{active: stateis('addnew')}"><a href ui-sref="addnew">Your Record</a></li>
+        <li ng-class="{active: stateis('about')}"><a href ui-sref="about">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+</header>

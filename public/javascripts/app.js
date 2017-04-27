@@ -9,7 +9,8 @@
       url: '/',
       views: {
         'header': {
-          templateUrl: '/views/header.html'
+          templateUrl: '/views/header.html',
+          controller: 'NavController'
         },
         'content': {
           templateUrl: '/views/home.html',
@@ -25,7 +26,8 @@
       url: '/member:id',
       views: {
         'header': {
-          templateUrl: '/views/header.html'
+          templateUrl: '/views/header.html',
+          controller: 'NavController'
         },
         'content': {
           templateUrl: '/views/detail.html',
@@ -41,7 +43,8 @@
       url: '/add',
       views: {
         'header': {
-          templateUrl: '/views/header.html'
+          templateUrl: '/views/header.html',
+          controller: 'NavController'
         },
         'content': {
           templateUrl: '/views/add-record.html',
@@ -57,7 +60,8 @@
       url: '/about',
       views: {
         'header': {
-          templateUrl: '/views/header.html'
+          templateUrl: '/views/header.html',
+          controller: 'NavController'
         },
         'content': {
           templateUrl: '/views/about.html',

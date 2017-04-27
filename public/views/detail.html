@@ -1,13 +1,20 @@
 <div ng-controller="MemberRecordController as individual">
-  <img ng-src={{individual.member.data.image.full}} alt={{individual.member.data.firstName}} />
-  <h1>{{individual.member.data.firstName}} {{individual.member.data.lastName}}</h1>
-  <p>{{individual.member.data.address.streetOne}}<br />
-     <span ng-show="{{individual.member.data.address.streetTwo}}"></span>
-     {{individual.member.data.address.city}}, {{individual.member.data.address.state}}  {{individual.member.data.address.zip}}
-  </p>
-  <p><a href="mailto:{{individual.member.data.email}}">{{individual.member.data.email}}</a></p>
-  <p><a href="tel:+{{individual.member.data.phone.phoneNumber}}">{{individual.member.data.phone.phoneNumber}}</a>
-    <button>Call</button> <button ng-show="individual.member.data.phone.textCapable">Text</button>
-    <button ui-sref="addnew">Add a new record</button>
-    <button ui-sref="main">Return to List</button>
+  <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <img class="detail-page-image" ng-src={{individual.member.data.image.full}} alt={{individual.member.data.firstName}} />
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <h3>{{individual.member.data.firstName}}</h3>
+      <h1>{{individual.member.data.lastName}}</h1>
+      <p>{{individual.member.data.address.streetOne}}<br />
+         <span ng-show="{{individual.member.data.address.streetTwo}}"></span>
+         {{individual.member.data.address.city}}, {{individual.member.data.address.state}}  {{individual.member.data.address.zip}}
+      </p>
+      <p><a href="mailto:{{individual.member.data.email}}">{{individual.member.data.email}}</a></p>
+      <p><a href="tel:+{{individual.member.data.phone.phoneNumber}}">{{individual.member.data.phone.phoneNumber}}</a>
+        <button>Call</button> <button ng-show="individual.member.data.phone.textCapable">Text</button>
+    </div>
+  </div>
+  <button ui-sref="addnew">Add a new record</button>
+  <button ui-sref="main">Return to List</button>
 </div>

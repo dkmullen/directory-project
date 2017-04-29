@@ -1,7 +1,7 @@
 <div ng-controller="MemberRecordController as individual">
   <div class="row">
     <div class="col-xs-12 col-md-8">
-      <img class="detail-page-image" ng-src={{individual.member.data.image.full}} alt={{individual.member.data.firstName}} />
+      <img class="img-responsive detail-page-image" height="413" width="550" ng-src={{individual.member.data.image.full}} alt={{individual.member.data.firstName}} />
     </div>
     <div class="col-xs-12 col-md-4 second-column">
       <h3>{{individual.member.data.firstName}}</h3>
@@ -11,8 +11,9 @@
          {{individual.member.data.address.city}}, {{individual.member.data.address.state}}  {{individual.member.data.address.zip}}
       </p>
       <p><a href="mailto:{{individual.member.data.email}}">{{individual.member.data.email}}</a></p>
-      <p><a href="tel:+{{individual.member.data.phone.phoneNumber}}">{{individual.member.data.phone.phoneNumber}}</a>
-        <button class="btn orange-button">Call</button> <button class="btn orange-button" ng-show="individual.member.data.phone.textCapable">Text</button>
+      <p><a href="tel:+{{individual.member.data.phone.phoneNumber}}">{{individual.member.data.phone.phoneNumber}}</a></p>
+      <button class="btn orange-button"><a href="tel:+{{individual.member.data.phone.phoneNumber}}">Call</a></button>
+      <button class="btn orange-button" ng-show="individual.member.data.phone.textCapable"><a href="sms:+{{individual.member.data.phone.phoneNumber}}">Text</a></button>
     </div>
   </div>
 </div>

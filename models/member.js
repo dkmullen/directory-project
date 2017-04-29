@@ -8,7 +8,7 @@ const memberSchema = new Schema({
   lastName: { type: String, required: true },
   dateOfBirth: { type: Date },
   phone: {
-    phoneNumber: { type: Number },
+    phoneNumber: { type: String },
     textCapable: { type: Boolean, default: true },
   },
   email: { type: String },

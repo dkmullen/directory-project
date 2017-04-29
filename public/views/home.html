@@ -1,5 +1,5 @@
 <div class="row">
-  <div id="container" ng-controller="MemberListController as directory">
+  <div id="home-container" ng-controller="MemberListController as directory">
     <div id="grid-pix" ng-repeat="member in directory.members.data | orderBy: 'lastName'">
       <div><a ui-sref="detail({id: member._id})">
         <img ng-src={{member.image.thumb}} alt={{member.firstName}} />

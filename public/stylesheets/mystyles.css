@@ -1,9 +1,10 @@
 body {
-  max-width: 1024px;
-  margin: 0 auto;
-  width: 100%;
   color: rgb(116, 106, 100);
   background-color: rgb(246,245,231);
+}
+#index-container {
+    margin: 0 auto;
+    max-width: 1024px;
 }
 #grid-pix {
   display: inline-block;
@@ -12,7 +13,7 @@ body {
 a, a:hover {
   color: rgb(249, 109, 22);
 }
-#container {
+#home-container {
   text-align: center;
 }
 header {
@@ -32,9 +33,29 @@ header {
 #who-we-are-headline {
   margin-top: -5px;
 }
-/*
-
-
-https://dummyimage.com/
-
-*/
+footer {
+  margin-top: 50px;
+  padding-top: 50px;
+  background-color: rgb(116, 106, 100);
+  color: rgb(246,245,231);
+  text-align: center;
+  height: 350px;
+}
+.footer-links {
+  margin-top: 25px;
+}
+.list-unstyled li{
+  display:inline-block;
+  margin: 10px;
+  font-size: 200%;
+}
+.list-unstyled li a {
+  color: rgb(246, 245, 231);;
+}
+.orange-button {
+  background-color: rgb(249, 109, 22);
+  color: rgb(246,245,231);
+}
+.second-column {
+  padding-left: 50px;
+}

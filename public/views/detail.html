@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-md-8">
       <img class="detail-page-image" ng-src={{individual.member.data.image.full}} alt={{individual.member.data.firstName}} />
     </div>
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-md-4 second-column">
       <h3>{{individual.member.data.firstName}}</h3>
       <h1>{{individual.member.data.lastName}}</h1>
       <p>{{individual.member.data.address.streetOne}}<br />
@@ -12,9 +12,7 @@
       </p>
       <p><a href="mailto:{{individual.member.data.email}}">{{individual.member.data.email}}</a></p>
       <p><a href="tel:+{{individual.member.data.phone.phoneNumber}}">{{individual.member.data.phone.phoneNumber}}</a>
-        <button>Call</button> <button ng-show="individual.member.data.phone.textCapable">Text</button>
+        <button class="btn orange-button">Call</button> <button class="btn orange-button" ng-show="individual.member.data.phone.textCapable">Text</button>
     </div>
   </div>
-  <button ui-sref="addnew">Add a new record</button>
-  <button ui-sref="main">Return to List</button>
 </div>

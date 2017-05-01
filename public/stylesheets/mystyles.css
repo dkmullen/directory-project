@@ -63,6 +63,9 @@ footer {
 }
 .second-column {
 }
+.last-name {
+  margin-top: -5px;
+}
 @media screen and (max-width: 991px) {
     .second-column {
         width: 90%;

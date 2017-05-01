@@ -32,10 +32,7 @@
     }])
 
     .controller('PostNewRecordController', [ '$scope', '$http', function($scope, $http) {
-        $scope.newRecord =
-          {"firstName": "Not so Handsome",
-          "lastName": "Jim"
-          };
+        $scope.newRecord = {};
 
         $scope.saveNewRecord = function() {
           $http({
@@ -45,11 +42,10 @@
             headers : { 'Content-Type': 'application/json' }
           })
           .then((data) => {
-            alert('Got it');
+            console.log($scope.newRecord);
           })
           .catch((err) => {
             console.log('You got knocked the F out, man!');
-            console.log($scope.newRecord);
           });
         };
     }])

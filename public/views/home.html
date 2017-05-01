@@ -2,7 +2,7 @@
   <div id="home-container" ng-controller="MemberListController as directory">
     <div id="grid-pix" ng-repeat="member in directory.members.data | orderBy: 'lastName'">
       <div><a ui-sref="detail({id: member._id})">
-        <img ng-src={{member.image.thumb}} alt={{member.firstName}} />
+        <img ng-src={{member.image.thumb}} alt={{member.firstName}} height="225" width="300" />
         <h3>{{member.firstName}} {{member.lastName}}</h3>
       </a></div>
     </div>

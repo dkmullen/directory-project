@@ -20,8 +20,8 @@ const memberSchema = new Schema({
     zip: { type: String }
   },
   image: {
-     full: {type: String },
-     thumb: { type: String}
+     full: {type: String, default: '../resources/img_soon.jpg' },
+     thumb: { type: String, default: '../resources/img_soon.jpg'}
   }
 });
 

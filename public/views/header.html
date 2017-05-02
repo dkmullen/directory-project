@@ -1,14 +1,32 @@
 <header>
   <div class="row">
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-6">
       <a href ui-sref="main"><img src="../resources/app_logo.png" alt="logo"></a>
     </div>
-    <div class="col-xs-12 col-md-8">
+
+    <div class="col-xs-6">
       <ul class="nav nav-pills orange" role="navigation">
         <li ng-class="{active: stateis('main')}"><a href ui-sref="main">Home</a></li>
         <li ng-class="{active: stateis('addnew')}"><a href ui-sref="addnew">Your Record</a></li>
         <li ng-class="{active: stateis('about')}"><a href ui-sref="about">About Us</a></li>
       </ul>
+
+      <div class="dropdown">
+        <button class="btn orange-button dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Menu
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li ng-class="{active: stateis('main')}"><a href ui-sref="main">Home</a></li>
+          <li ng-class="{active: stateis('addnew')}"><a href ui-sref="addnew">Your Record</a></li>
+          <li ng-class="{active: stateis('about')}"><a href ui-sref="about">About Us</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Log out</a></li>
+        </ul>
+      </div>
+
+
+
     </div>
   </div>
 </header>

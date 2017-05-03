@@ -70,6 +70,24 @@
           templateUrl: '/views/footer.html'
         }
       }
+    })
+
+    .state('login', {
+      url: '/login',
+      views: {
+        'content': {
+          templateUrl: '/views/login.html',
+        }
+      }
+    })
+
+    .state('signup', {
+      url: '/signup',
+      views: {
+        'content': {
+          templateUrl: '/views/signup.html',
+        }
+      }
     });
 
     $urlRouterProvider.otherwise('/');

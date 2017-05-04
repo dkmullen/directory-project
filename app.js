@@ -6,9 +6,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var db = require('./models/db');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+var config = require('./config');
+
+mongoose.connect(config.mongoUrl);
+//var db = require('./models/db');
+
 var member = require('./models/member');
 var routes = require('./routes/routes');
+var users = require('./routes/users');
 
 var app = express();
 

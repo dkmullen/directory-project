@@ -31,4 +31,12 @@
     </div>
   </form>
 
+  <input type="file" accept="image/*" image="image2"
+    resize-max-height="300"
+    resize-max-width="250"
+    resize-quality="0.7" />
+Original <img ng-show="image2" ng-src="{{image2.url}}" type="{{image2.file.type}}" />
+Resized <img ng-show="image2" ng-src="{{image2.resized.dataURL}}" />
+
+
 </div>

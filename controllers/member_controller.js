@@ -2,8 +2,6 @@
 // This file contains instruction about what to do with incoming routes.
 
 const Member = require('../models/member');
-var Verify = require('../routes/verify');
-
 
 module.exports = {
   // Get all the records

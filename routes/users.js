@@ -4,11 +4,6 @@ var passport = require('passport');
 var User = require('../models/user');
 var Verify    = require('./verify');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 router.post('/register', function(req, res) {
     User.register(new User({ username : req.body.username }),
       req.body.password, function(err, user) {

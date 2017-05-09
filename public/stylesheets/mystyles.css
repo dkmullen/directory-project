@@ -72,8 +72,11 @@ footer {
   margin-top: -5px;
 }
 .dropdown {
-  border: 1px solid rgb(249, 109, 22);
   display: none;
+}
+.glyphicon-menu-hamburger {
+  font-size: 25px;
+  color: rgb(249, 109, 22);
 }
 .icon-bar {
   background-color: rgb(249, 109, 22);
@@ -88,13 +91,12 @@ footer {
 }
 
 
-
-
 @media screen and (max-width: 991px) {
     .second-column {
         width: 90%;
         padding-left: 50px;
     }
+}
 @media screen and (max-width: 767px) {
   .nav-pills {
     display: none;
@@ -102,5 +104,13 @@ footer {
   .dropdown {
     display: inline-block;
     float: right;
+  }
+  .detail-page-image, .placeholder-image, .about-image, header {
+    margin-left: 5px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .list-unstyled li{
+    font-size: 120%;
   }
 }

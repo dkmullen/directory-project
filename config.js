@@ -3,6 +3,6 @@ var uri = "mongodb://username:PASSWORD@cluster0-shard-00-00-jphcz.mongodb.net:27
 var uri2 = 'mongodb://localhost:27017/directory-app';
 module.exports = {
     'secretKey': '',
-    
+
     'mongoUrl' : uri2
 };

@@ -48,6 +48,8 @@
           })
           .then((data) => {
             console.log($scope.newRecord);
+            data = {};
+            $scope.newRecordForm.$setPristine();
           })
           .catch((err) => {
             console.log('You got knocked out, man!');

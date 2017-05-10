@@ -7,12 +7,15 @@
     let directory = this;
     directory.members = [];
 
+    /* This gets the list of members from the DB for the home view, binds it to
+       directory.members. MemberListController is called from the home view.
+    */
     $http.get('/members')
       .then((data) => {
         directory.members = data;
       })
       .catch((err) => {
-        console.log('You got knocked the F out, man!');
+        console.log('You got knocked out, man!');
       });
   }])
 
@@ -22,18 +25,20 @@
       record.member = [];
       $scope.id = $stateParams.id;
 
+      // Get a single member, bind it to record,member for detail view
       $http.get('/members/' + $scope.id)
         .then((data) => {
           record.member = data;
         })
         .catch((err) => {
-          console.log('You got knocked the F out, man!');
+          console.log('You got knocked out, man!');
         });
     }])
 
     .controller('PostNewRecordController', [ '$scope', '$http', function($scope, $http) {
         $scope.newRecord = {};
 
+        // Add a new member to the DB from add-record view
         $scope.saveNewRecord = function() {
           $http({
             method: 'POST',
@@ -45,11 +50,12 @@
             console.log($scope.newRecord);
           })
           .catch((err) => {
-            console.log('You got knocked the F out, man!');
+            console.log('You got knocked out, man!');
           });
         };
     }])
 
+    // Determines which page we are on so nav pill can be highlighted accordingly
     .controller('NavController', ['$scope', '$state', function($scope, $state) {
       $scope.stateis = function(currentState) {
        return $state.is(currentState);

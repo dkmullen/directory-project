@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+// This file checks for user authentication
 
 const express = require('express'),
       morgan = require('morgan'),

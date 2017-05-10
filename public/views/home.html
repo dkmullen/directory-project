@@ -1,3 +1,4 @@
+<!-- Iterate through all members, list them alphabetically by last name -->
 <div class="row">
   <div id="home-container" ng-controller="MemberListController as directory">
     <div id="grid-pix" ng-repeat="member in directory.members.data | orderBy: 'lastName'">

@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+// This file sets the various app states
 
 (function() {
   const app = angular.module('directoryApp', ['ui.router']);
@@ -6,6 +7,7 @@
     $stateProvider
 
     .state('main', {
+      // If url is /, load header, home, and footer. Likewise w/other routes
       url: '/',
       views: {
         'header': {
@@ -90,6 +92,7 @@
       }
     });
 
+    // All other routes redirect to main view
     $urlRouterProvider.otherwise('/');
   });
 })();

@@ -1,0 +1,116 @@
+body, .dropdown-menu {
+  color: rgb(116, 106, 100);
+  background-color: rgb(246,245,231);
+}
+#index-container {
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 25px;
+}
+#grid-pix {
+  display: inline-block;
+  margin: 5px 5px 25px 5px;
+}
+a, a:hover {
+  color: rgb(249, 109, 22);
+}
+#home-container {
+  text-align: center;
+}
+header {
+  margin: 25px;
+}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus,
+.dropdown-menu > li.active > a,
+.dropdown-menu > li.active > a:hover,
+.dropdown-menu > li.active > a:focus {
+  background-color: rgb(249, 109, 22);
+}
+
+.detail-page-image, .placeholder-image, .about-image {
+  margin-left: 30px;
+  padding-bottom: 25px;
+}
+.info-form {
+  text-align: center;
+}
+#who-we-are-headline {
+  margin-top: -5px;
+}
+footer {
+  margin-top: 50px;
+  padding-top: 50px;
+  background-color: rgb(116, 106, 100);
+  color: rgb(246,245,231);
+  text-align: center;
+  height: 350px;
+}
+.footer-links {
+  margin-top: 25px;
+}
+.list-unstyled li{
+  display:inline-block;
+  margin: 10px;
+  font-size: 200%;
+}
+.list-unstyled li a {
+  color: rgb(246, 245, 231);;
+}
+.orange-button, .orange-button a {
+  background-color: rgb(249, 109, 22);
+  color: rgb(246,245,231);
+}
+.brown-button, .brown-button a {
+  background-color: rgb(116, 106, 100);
+  color: rgb(246,245,231);
+}
+.second-column {
+}
+.last-name {
+  margin-top: -5px;
+}
+.dropdown {
+  display: none;
+}
+.glyphicon-menu-hamburger {
+  font-size: 25px;
+  color: rgb(249, 109, 22);
+}
+.icon-bar {
+  background-color: rgb(249, 109, 22);
+}
+#login-container {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto;
+}
+.login-logo {
+  margin: 30px 0 60px 0;
+}
+
+
+@media screen and (max-width: 991px) {
+    .second-column {
+        width: 90%;
+        padding-left: 50px;
+    }
+}
+@media screen and (max-width: 767px) {
+  .nav-pills {
+    display: none;
+  }
+  .dropdown {
+    display: inline-block;
+    float: right;
+  }
+  .detail-page-image, .placeholder-image, .about-image, header {
+    margin-left: 5px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .list-unstyled li{
+    font-size: 120%;
+  }
+}

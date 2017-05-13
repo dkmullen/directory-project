@@ -1,0 +1,77 @@
+<div ng-controller="PostNewRecordController as post">
+  <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <img class="img-responsive placeholder-image" height="413" width="550" src="../resources/img_soon.jpg" alt="placeholder-image" />
+    </div>
+
+    <div class="col-xs-12 col-md-4 second-column">
+      <div class="row">
+        <h4>Fill in your directory profile</h4>
+      </div>
+
+      <form class="form-horizontal info-form" role="form" name="newRecordForm" ng-submit="saveNewRecord()" novalidate>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-6">
+              <input type="text" class="form-control" id="firstName" name="firstName" ng-model="newRecord.firstName" placeholder=" First Name" />
+            </div>
+            <div class="col-xs-6">
+              <input type="text" class="form-control" id="lastName" name="lastName" ng-model="newRecord.lastName" placeholder=" Last Name"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-6">
+              <label for="dateOfBirth">Date of Birth:</label><br />
+              <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" ng-model="newRecord.dateOfBirth"/ >
+            </div>
+            <div class="col-xs-6">
+              <label for="email">Email:</label><br />
+              <input type="text" class="form-control" id="email" name="email" ng-model="newRecord.email"/ >
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-6">
+              <label for="phoneNumber">Phone:</label><br />
+              <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" ng-model="newRecord.phone.phoneNumber"/>
+            </div>
+            <div class="col-xs-6">
+              Texts at this #?<br />
+              <label class="radio-inline">
+                <input type="radio" id="text-yes" name="textCapable" ng-model="newRecord.phone.textCapable" value="true" /> Y
+              </label>
+              <label class="radio-inline">
+                <input type="radio" id="text-no" name="textCapable" ng-model="newRecord.phone.textCapable" value="false" /> N
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="streetOne" name="streetOne" ng-model="newRecord.address.streetOne" placeholder=" Address Line 1"/>
+          <input type="text" class="form-control" name="streetTwo" ng-model="newRecord.address.streetTwo" placeholder=" Address Line 2"/>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-8">
+              <input type="text" class="form-control" name="city" ng-model="newRecord.address.city" placeholder=" City" />
+            </div>
+            <div class="col-xs-4">
+              <input type="text" class="form-control" name="state" ng-model="newRecord.address.state" placeholder=" ST" />
+            </div>
+          </div>
+          <input type="text" class="form-control" name="zip" ng-model="newRecord.address.zip" placeholder=" Zip" />
+        </div>
+
+        <input type="submit" class="btn orange-button" value="Submit">
+      </form>
+    </div>
+  </div>
+
+</div>

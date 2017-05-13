@@ -19,8 +19,8 @@
       });
   }])
 
-  .controller('MemberRecordController', [ '$http', '$scope', '$stateParams',
-    function($http, $scope, $stateParams) {
+  .controller('MemberRecordController', [ '$http', '$scope', '$log', '$stateParams',
+    function($http, $scope, $log, $stateParams) {
       let record = this;
       record.member = [];
       $scope.id = $stateParams.id;
@@ -31,11 +31,11 @@
           record.member = data;
         })
         .catch((err) => {
-          console.log('You got knocked out, man!');
+          $log.error('You got knocked out, man!');
         });
     }])
 
-    .controller('PostNewRecordController', [ '$scope', '$http', function($scope, $http) {
+    .controller('PostNewRecordController', [ '$scope', '$http', '$log', function($scope, $http, $log) {
         $scope.newRecord = {};
 
         // Add a new member to the DB from add-record view
@@ -47,12 +47,12 @@
             headers : { 'Content-Type': 'application/json' }
           })
           .then((data) => {
-            console.log($scope.newRecord);
+            $log.info($scope.newRecord);
             data = {};
             $scope.newRecordForm.$setPristine();
           })
           .catch((err) => {
-            console.log('You got knocked out, man!');
+            $log.error('You got knocked out, man!');
           });
         };
     }])

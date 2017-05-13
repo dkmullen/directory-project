@@ -15,6 +15,7 @@
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "jade": "~1.11.0",
+    "jquery-slim": "^3.0.0",
     "jsonwebtoken": "^7.4.0",
     "method-override": "^2.3.8",
     "mongoose": "^4.9.5",

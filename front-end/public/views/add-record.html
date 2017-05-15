@@ -1,6 +1,6 @@
 <div ng-controller="PostNewRecordController as post">
   <div class="row">
-    <div class="col-xs-12 col-md-8">
+    <div class="col-xs-12 col-md-8 first-column">
       <img class="img-responsive placeholder-image" height="413" width="550" src="../resources/img_soon.jpg" alt="placeholder-image" />
     </div>
 
@@ -11,38 +11,44 @@
 
       <form class="form-horizontal info-form" role="form" name="newRecordForm" ng-submit="saveNewRecord()" novalidate>
 
-        <div class="form-group">
-          <div class="row">
-            <div class="col-xs-6">
-              <input type="text" class="form-control" id="firstName" name="firstName" ng-model="newRecord.firstName" placeholder=" First Name" />
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group" ng-class="{'has-success': !newRecordForm.firstName.$error.required}">
+              <input type="text" class="form-control" id="firstName" name="firstName" ng-model="newRecord.firstName" required placeholder=" First Name" />
             </div>
-            <div class="col-xs-6">
-              <input type="text" class="form-control" id="lastName" name="lastName" ng-model="newRecord.lastName" placeholder=" Last Name"/>
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group" ng-class="{'has-success': !newRecordForm.lastName.$error.required}">
+              <input type="text" class="form-control" id="lastName" name="lastName" ng-model="newRecord.lastName" required placeholder=" Last Name"/>
             </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="row">
-            <div class="col-xs-6">
-              <label for="dateOfBirth">Date of Birth:</label><br />
-              <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" ng-model="newRecord.dateOfBirth"/ >
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group" ng-class="{'has-success': !newRecordForm.dateOfBirth.$error.required}">
+              <label class="control-label" for="dateOfBirth">Date of Birth:</label><br />
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" ng-model="newRecord.dateOfBirth" required />
             </div>
-            <div class="col-xs-6">
-              <label for="email">Email:</label><br />
-              <input type="text" class="form-control" id="email" name="email" ng-model="newRecord.email"/ >
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group" ng-class="{'has-success': !newRecordForm.email.$invalid}">
+              <label class="control-label" for="email">Email:</label><br />
+              <input type="email" class="form-control" id="email" name="email" ng-model="newRecord.email" required />
             </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="row">
-            <div class="col-xs-6">
-              <label for="phoneNumber">Phone:</label><br />
-              <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" ng-model="newRecord.phone.phoneNumber"/>
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group" ng-class="{'has-success': !newRecordForm.phoneNumber.$invalid}">
+              <label class="control-label" for="phoneNumber">Phone:</label><br />
+              <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" ng-model="newRecord.phone.phoneNumber" required />
             </div>
-            <div class="col-xs-6">
-              Texts at this #?<br />
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group">
+              <label for="textCapable">Texts at this #?</label><br />
               <label class="radio-inline">
                 <input type="radio" id="text-yes" name="textCapable" ng-model="newRecord.phone.textCapable" value="true" /> Y
               </label>
@@ -53,23 +59,31 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <input type="text" class="form-control" id="streetOne" name="streetOne" ng-model="newRecord.address.streetOne" placeholder=" Address Line 1"/>
-          <input type="text" class="form-control" name="streetTwo" ng-model="newRecord.address.streetTwo" placeholder=" Address Line 2"/>
+        <div class="form-group" ng-class="{'has-success': !newRecordForm.streetOne.$error.required}">
+          <input type="text" class="form-control" id="streetOne" name="streetOne" ng-model="newRecord.address.streetOne" placeholder=" Address Line 1" required />
         </div>
         <div class="form-group">
-          <div class="row">
-            <div class="col-xs-8">
-              <input type="text" class="form-control" name="city" ng-model="newRecord.address.city" placeholder=" City" />
-            </div>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" name="state" ng-model="newRecord.address.state" placeholder=" ST" />
-            </div>
-          </div>
-          <input type="text" class="form-control" name="zip" ng-model="newRecord.address.zip" placeholder=" Zip" />
+          <input type="text" class="form-control" name="streetTwo" ng-model="newRecord.address.streetTwo" placeholder=" Address Line 2 (optional)"/>
         </div>
 
-        <input type="submit" class="btn orange-button" value="Submit">
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group" ng-class="{'has-success': !newRecordForm.city.$error.required}">
+              <input type="text" class="form-control" name="city" ng-model="newRecord.address.city" placeholder=" City" required />
+            </div>
+          </div>
+          <div class="col-xs-2">
+            <div class="form-group" ng-class="{'has-success': !newRecordForm.state.$error.required}">
+            <input type="text" class="form-control" name="state" ng-model="newRecord.address.state" placeholder=" ST" required />
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="form-group" ng-class="{'has-success': !newRecordForm.zip.$error.required}">
+              <input type="text" class="form-control" name="zip" ng-model="newRecord.address.zip" placeholder=" Zip" required />
+            </div>
+          </div>
+        </div>
+        <input type="submit" class="btn orange-button" value="Submit" ng-disabled="newRecordForm.$invalid">
       </form>
     </div>
   </div>

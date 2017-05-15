@@ -36,7 +36,23 @@
     }])
 
     .controller('PostNewRecordController', [ '$scope', '$http', '$log', function($scope, $http, $log) {
-        $scope.newRecord = {};
+      $scope.newRecord = {
+          firstName: '',
+          lastName: '',
+          dateOfBirth: '',
+          email: '',
+          phone: {
+            phoneNumber: '',
+            textCapable: 'false'
+          },
+          address: {
+            streetOne: '',
+            streetTwo: '',
+            city: '',
+            state: '',
+            zip: ''
+          }
+        };
 
         // Add a new member to the DB from add-record view
         $scope.saveNewRecord = function() {
@@ -47,8 +63,23 @@
             headers : { 'Content-Type': 'application/json' }
           })
           .then((data) => {
-            $log.info($scope.newRecord);
-            data = {};
+            $scope.newRecord = {
+                firstName: '',
+                lastName: '',
+                dateOfBirth: '',
+                email: '',
+                phone: {
+                  phoneNumber: '',
+                  textCapable: 'false'
+                },
+                address: {
+                  streetOne: '',
+                  streetTwo: '',
+                  city: '',
+                  state: '',
+                  zip: ''
+                }
+              };
             $scope.newRecordForm.$setPristine();
           })
           .catch((err) => {

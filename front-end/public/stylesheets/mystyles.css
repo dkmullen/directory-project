@@ -35,6 +35,7 @@ header {
 }
 .info-form {
   text-align: center;
+  margin-left: -25px;
 }
 #who-we-are-headline {
   margin-top: -5px;
@@ -90,11 +91,14 @@ footer {
   margin: 30px 0 60px 0;
 }
 
-
 @media screen and (max-width: 991px) {
     .second-column {
         width: 90%;
         padding-left: 50px;
+    }
+    .info-form {
+      margin-left: 10px;
+      max-width: 525px;
     }
 }
 @media screen and (max-width: 767px) {
@@ -106,7 +110,10 @@ footer {
     float: right;
   }
   .detail-page-image, .placeholder-image, .about-image, header {
-    margin-left: 5px;
+    margin-left: 15px;
+  }
+  .info-form {
+    margin-left: -10px;
   }
 }
 @media screen and (max-width: 600px) {

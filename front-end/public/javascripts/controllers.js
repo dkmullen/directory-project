@@ -35,7 +35,9 @@
         });
     }])
 
-    .controller('PostNewRecordController', [ '$scope', '$http', '$log', function($scope, $http, $log) {
+    .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$timeout',
+      function($scope, $http, $log, $timeout) {
+      $scope.success = false;
       $scope.newRecord = {
           firstName: '',
           lastName: '',
@@ -76,11 +78,19 @@
                   streetOne: '',
                   streetTwo: '',
                   city: '',
-                  state: '',
+                  state: 'TN',
                   zip: ''
                 }
               };
-            $scope.newRecordForm.$setPristine();
+              $scope.newRecordForm.$setPristine();
+              $scope.success = true;
+              $timeout(() => {
+                /* We use 'apply' to add this to the watchlist so the view
+                updates when this model updates */
+                $scope.$apply(() => {
+                  $scope.success = false;
+                });
+              }, 3000);
           })
           .catch((err) => {
             $log.error('You got knocked out, man!');

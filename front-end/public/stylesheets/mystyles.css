@@ -28,6 +28,9 @@ header {
 .dropdown-menu > li.active > a:focus {
   background-color: rgb(249, 109, 22);
 }
+.main-nav {
+  float: right;
+}
 
 .detail-page-image, .placeholder-image, .about-image {
   margin-left: 30px;

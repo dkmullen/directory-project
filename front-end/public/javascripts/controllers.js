@@ -38,6 +38,8 @@
     .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$timeout',
       function($scope, $http, $log, $timeout) {
       $scope.success = false;
+      $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
+      $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
       $scope.newRecord = {
           firstName: '',
           lastName: '',
@@ -45,7 +47,7 @@
           email: '',
           phone: {
             phoneNumber: '',
-            textCapable: 'false'
+            textCapable: ''
           },
           address: {
             streetOne: '',
@@ -72,7 +74,7 @@
                 email: '',
                 phone: {
                   phoneNumber: '',
-                  textCapable: 'false'
+                  textCapable: ''
                 },
                 address: {
                   streetOne: '',

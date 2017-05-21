@@ -26,6 +26,7 @@
                       id="firstName"
                       name="firstName"
                       ng-model="newRecord.firstName"
+                      autofocus="true"
                       placeholder=" First Name"
                       required />
             </div>
@@ -269,11 +270,17 @@
                   class="btn orange-button"
                   value="Submit"
                   ng-disabled="newRecordForm.$invalid">
+
+          <input type="button"
+                  class="btn brown-button"
+                  value="Cancel"
+                  ng-click="clearform()"
+                  ng-disabled="newRecordForm.$pristine">
         </div>
 
         <div class="row">
           <span class="message"
-                  ng-class="{'vis-hidden': !success}">Your record has been saved.
+                  ng-class="{'vis-hidden': !successmessage}">Your record has been saved.
           </span>
         </div>
       </form>

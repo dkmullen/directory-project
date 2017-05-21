@@ -35,12 +35,10 @@
         });
     }])
 
-    .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$timeout',
-      function($scope, $http, $log, $timeout) {
-      $scope.success = false;
-      $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
-      $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
-      $scope.newRecord = {
+  .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$timeout',
+    function($scope, $http, $log, $timeout) {
+      function clearRecord() {
+        let blankRecord = {
           firstName: '',
           lastName: '',
           dateOfBirth: '',
@@ -55,56 +53,50 @@
             city: '',
             state: 'TN',
             zip: ''
-          }
-        };
+            }
+          };
+          return blankRecord;
+      }
+      $scope.newRecord = clearRecord();
+      $scope.successmessage = false;
+      $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
+      $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
 
-        // Add a new member to the DB from add-record view
-        $scope.saveNewRecord = function() {
-          $http({
-            method: 'POST',
-            url: 'members',
-            data: $scope.newRecord,
-            headers : { 'Content-Type': 'application/json' }
-          })
-          .then((data) => {
-            $scope.newRecord = {
-                firstName: '',
-                lastName: '',
-                dateOfBirth: '',
-                email: '',
-                phone: {
-                  phoneNumber: '',
-                  textCapable: ''
-                },
-                address: {
-                  streetOne: '',
-                  streetTwo: '',
-                  city: '',
-                  state: 'TN',
-                  zip: ''
-                }
-              };
-              $scope.newRecordForm.$setPristine();
-              $scope.success = true;
-              $timeout(() => {
-                /* We use 'apply' to add this to the watchlist so the view
-                updates when this model updates */
-                $scope.$apply(() => {
-                  $scope.success = false;
-                });
-              }, 3000);
-          })
-          .catch((err) => {
-            $log.error('You got knocked out, man!');
-          });
-        };
-    }])
-
-    // Determines which page we are on so nav pill can be highlighted accordingly
-    .controller('NavController', ['$scope', '$state', function($scope, $state) {
-      $scope.stateis = function(currentState) {
-       return $state.is(currentState);
+      // Add a new member to the DB from add-record view
+      $scope.saveNewRecord = () => {
+        $http({
+          method: 'POST',
+          url: 'members',
+          data: $scope.newRecord,
+          headers : { 'Content-Type': 'application/json' }
+        })
+        .then((data) => {
+          $scope.newRecord = clearRecord();
+          $scope.newRecordForm.$setPristine();
+          $scope.successmessage = true;
+          $timeout(() => {
+            /* We use 'apply' to add this to the watchlist so the view
+            updates when this model updates */
+            $scope.$apply(() => {
+              $scope.successmessage = false;
+            });
+          }, 3000);
+        })
+        .catch((err) => {
+          $log.error('You got knocked out, man!');
+        });
       };
-    }]);
+      $scope.clearform = () => {
+        $scope.newRecord = clearRecord();
+        $scope.newRecordForm.$setPristine();
+      };
+  }])
+
+  // Determines which page we are on so nav pill can be highlighted accordingly
+  .controller('NavController', ['$scope', '$state', function($scope, $state) {
+    $scope.stateis = (currentState) => {
+     return $state.is(currentState);
+    };
+  }]);
 
 })();

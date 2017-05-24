@@ -1,9 +1,9 @@
 /*jshint esversion: 6 */
 // This file sets the various app states
 
-(function() {
+(() => {
   const app = angular.module('directoryApp', ['ui.router']);
-  app.config(function($stateProvider, $urlRouterProvider) {
+  app.config(($stateProvider, $urlRouterProvider) => {
     $stateProvider
 
     .state('main', {

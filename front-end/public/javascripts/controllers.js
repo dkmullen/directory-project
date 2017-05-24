@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-(function() {
+(() => {
   angular.module('directoryApp') // this only retrieves the module, created in app.js
 
   .controller('MemberListController', [ '$http', function($http) {
@@ -98,5 +98,4 @@
      return $state.is(currentState);
     };
   }]);
-
 })();

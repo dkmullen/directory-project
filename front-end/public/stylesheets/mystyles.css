@@ -126,4 +126,10 @@ footer {
   .list-unstyled li{
     font-size: 120%;
   }
+  .detail-page-image, .placeholder-image, .about-image {
+    margin-left: 10px;
+  }
+  .index-container {
+    padding: 0;
+  }
 }

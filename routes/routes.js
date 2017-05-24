@@ -12,4 +12,5 @@ module.exports = (app) => {
   app.get('/members/:id', MemberController.getone);
   app.put('/members/:id', MemberController.edit);
   app.delete('/members/:id', MemberController.delete);
+
 };

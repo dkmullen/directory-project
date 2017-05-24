@@ -2,6 +2,7 @@
 // This file contains instruction about what to do with incoming routes.
 
 const Member = require('../models/member');
+const User = require('../models/user');
 
 module.exports = {
   // Get all the records
@@ -48,5 +49,5 @@ module.exports = {
       // 204 = Server has fulfilled the request, & there is no additional info
       .then(member => res.status(204).send(member))
       .catch(next);
-  }
+  },
 };

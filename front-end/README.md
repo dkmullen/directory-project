@@ -9,7 +9,6 @@ To install, clone the repository, install the dependencies with npm, install and
 
 TODO (as of May 10, 2017)
 - Finish login / sign-up procedures
-- Form validation
 - Fix date-field on forms in iOS
 - Enable photo uploading
 - Enable record-by-record scanning in detail-view

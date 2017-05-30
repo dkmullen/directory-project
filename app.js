@@ -12,10 +12,13 @@ const express = require('express'),
   member = require('./models/member'),
   routes = require('./routes/routes'),
   users = require('./routes/users'),
+  jwt = require('jsonwebtoken'),
+  user = require('./models/user'),
   app = express();
 
 mongoose.connect(config.mongoUrl);
 mongoose.Promise = global.Promise;
+app.set('secret', config.secret);
 
 app.use(favicon(path.join(__dirname, 'front-end/public/resources', 'favicon.ico')));
 app.use(logger('dev'));

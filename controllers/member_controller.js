@@ -8,8 +8,8 @@ const express = require('express'),
   Member = require('../models/member'),
   User = require('../models/user');
 
-
 app.set('secretKey', config.secret);
+
 module.exports = {
   // Get all the records
   getall(req, res, next) {
@@ -58,7 +58,7 @@ module.exports = {
   },
 
   // Log in
-  login(req, res) {
+  gettoken(req, res) {
     const memberFirstName = req.body.firstName;
     Member.findOne({ firstName: memberFirstName },
     (err, member) => {
@@ -84,5 +84,5 @@ module.exports = {
         }
       }
     });
-  }
+  },
 };

@@ -1,9 +1,15 @@
 /*jshint esversion: 6 */
 // This file contains instruction about what to do with incoming routes.
 
-const Member = require('../models/member');
-const User = require('../models/user');
+const express = require('express'),
+  app = express(),
+  jwt = require('jsonwebtoken'),
+  config = require('../config'),
+  Member = require('../models/member'),
+  User = require('../models/user');
 
+
+app.set('secretKey', config.secret);
 module.exports = {
   // Get all the records
   getall(req, res, next) {
@@ -25,7 +31,7 @@ module.exports = {
   getone(req, res, next) {
     // id matches :id from routes.js put method, carried in on params
     const memberId = req.params.id;
-    Member.findById({ _id: memberId})
+    Member.findById({ _id: memberId })
       .then(member => res.send(member))
       .catch(next);
   },
@@ -50,4 +56,33 @@ module.exports = {
       .then(member => res.status(204).send(member))
       .catch(next);
   },
+
+  // Log in
+  login(req, res) {
+    const memberFirstName = req.body.firstName;
+    Member.findOne({ firstName: memberFirstName },
+    (err, member) => {
+    if (err) throw err;
+        if (!member) {
+        res.json({ success: false, message: 'Authentication failed. User not found.' });
+      } else if (member) {
+        // check if password matches
+        if (member.lastName != req.body.lastName) {
+          res.json({ success: false, message: 'Authentication failed. Wrong lastName.' });
+        } else {
+          // if member is found and password is right
+          // create a token
+          var token = jwt.sign(member, app.get('secretKey'), {
+            //expiresInMinutes: 1440 // expires in 24 hours - expiresInMinutes not allowed!
+          });
+          // return the information including token as JSON
+          res.json({
+            success: true,
+            message: 'Enjoy your token!',
+            token: token
+          });
+        }
+      }
+    });
+  }
 };

@@ -4,6 +4,6 @@ const uri = "mongodb://<username>:<pw>*@clusterdir-shard-00-02-jphcz.mongodb.net
 const uri2 = 'mongodb://localhost:27017/directory-app';
 
 module.exports = {
-    'secret': 'fakeSecret',
+    'secret': 'fakesecret',
     'mongoUrl' : uri2
 };

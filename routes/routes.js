@@ -13,5 +13,6 @@ module.exports = (app) => {
   app.put('/members/:id', MemberController.edit);
   app.delete('/members/:id', MemberController.delete);
   app.post('/auth', MemberController.gettoken);
+  //app.use('/members', MemberController.checktoken);
 
 };

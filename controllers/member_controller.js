@@ -10,41 +10,14 @@ const express = require('express'),
 
 app.set('secretKey', config.secret);
 
-// route middleware to verify a token
-app.use(function(req, res, next) {
-
-  // check header or url parameters or post parameters for token
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-  // decode token
-  if (token) {
-
-    // verifies secret and checks exp
-    jwt.verify(token, app.get('secretKey'), function(err, decoded) {
-      if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });
-      } else {
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
-      }
-    });
-
-  } else {
-
-    // if there is no token
-    // return an error
-    return res.status(403).send({
-        success: false,
-        message: 'No token provided.'
-    });
-
-  }
-});
+function checktoken2() {
+  console.log('Check your own token!');
+}
 
 module.exports = {
   // Get all the records
   getall(req, res, next) {
+    checktoken2();
     Member.find({}) // Find all members
       // 'members' is what I choose to call what is returned from the find func
       .then(members => res.send(members)) // send it
@@ -59,14 +32,7 @@ module.exports = {
       .catch(next);
   },
 
-  // Get just one record by id
-  getone(req, res, next) {
-    // id matches :id from routes.js put method, carried in on params
-    const memberId = req.params.id;
-    Member.findById({ _id: memberId })
-      .then(member => res.send(member))
-      .catch(next);
-  },
+
 
   // Edit just one record
   edit(req, res, next) {
@@ -117,4 +83,43 @@ module.exports = {
       }
     });
   },
+
+  // route middleware to verify a token
+  checktoken(req, res, next) {
+    console.log('checktoken');
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    // decode token
+    if (token) {
+
+      // verifies secret and checks exp
+      jwt.verify(token, app.get('secretKey'), function(err, decoded) {
+        if (err) {
+          return res.json({ success: false, message: 'Failed to authenticate token.' });
+        } else {
+          // if everything is good, save to request for use in other routes
+          req.decoded = decoded;
+          next();
+        }
+      });
+
+    } else {
+
+      // if there is no token
+      // return an error
+      return res.status(403).send({
+          success: false,
+          message: 'No token provided.'
+      });
+
+    }
+  },   // Get just one record by id
+    getone(req, res, next) {
+      // id matches :id from routes.js put method, carried in on params
+      const memberId = req.params.id;
+      Member.findById({ _id: memberId })
+        .then(member => res.send(member))
+        .catch(next);
+    },
 };

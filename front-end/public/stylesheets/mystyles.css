@@ -70,6 +70,9 @@ footer {
   background-color: rgb(116, 106, 100);
   color: rgb(246,245,231);
 }
+#listbutton {
+  margin-top: 15px;
+}
 .second-column {
 }
 .last-name {

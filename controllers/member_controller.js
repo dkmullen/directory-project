@@ -10,18 +10,23 @@ const express = require('express'),
 
 app.set('secretKey', config.secret);
 
-function checktoken2() {
-  console.log('Check your own token!');
-}
-
 module.exports = {
   // Get all the records
   getall(req, res, next) {
-    checktoken2();
     Member.find({}) // Find all members
       // 'members' is what I choose to call what is returned from the find func
       .then(members => res.send(members)) // send it
+      .then(console.log('From member_controller'))
       .catch(next); // in case of err, run the next thing, don't hang up here
+  },
+
+  // Get just one record by id
+  getone(req, res, next) {
+    // id matches :id from routes.js put method, carried in on params
+    const memberId = req.params.id;
+    Member.findById({ _id: memberId })
+      .then(member => res.send(member))
+      .catch(next);
   },
 
   // Create a new record
@@ -31,8 +36,6 @@ module.exports = {
       .then(member => res.send(member))
       .catch(next);
   },
-
-
 
   // Edit just one record
   edit(req, res, next) {
@@ -86,7 +89,6 @@ module.exports = {
 
   // route middleware to verify a token
   checktoken(req, res, next) {
-    console.log('checktoken');
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -105,21 +107,12 @@ module.exports = {
       });
 
     } else {
-
       // if there is no token
       // return an error
       return res.status(403).send({
-          success: false,
-          message: 'No token provided.'
+        success: false,
+        message: 'No token provided.'
       });
-
     }
-  },   // Get just one record by id
-    getone(req, res, next) {
-      // id matches :id from routes.js put method, carried in on params
-      const memberId = req.params.id;
-      Member.findById({ _id: memberId })
-        .then(member => res.send(member))
-        .catch(next);
-    },
+  }
 };

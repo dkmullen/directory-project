@@ -13,6 +13,7 @@
     $http.get('/members')
       .then((data) => {
         directory.members = data;
+        console.log(directory.members.data);
       })
       .catch((err) => {
         console.log('You got knocked out, man!');
@@ -34,6 +35,11 @@
           $log.error('You got knocked out, man!');
         });
     }])
+
+  /*.controller('LogInController', [ '$http', '$scope', '$log', '$stateParams',
+    function($http, $scope, $log, $stateParams) {
+      return redirect('/signup');
+    }])*/
 
   .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$timeout',
     function($scope, $http, $log, $timeout) {
@@ -97,5 +103,5 @@
     $scope.stateis = (currentState) => {
      return $state.is(currentState);
     };
-  }]);
+}]);
 })();

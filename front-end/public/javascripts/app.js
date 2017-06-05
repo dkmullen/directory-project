@@ -15,8 +15,8 @@
           controller: 'NavController'
         },
         'content': {
-          templateUrl: '/views/home.html',
-          controller: 'MemberListController'
+          templateUrl: '/views/home.html'
+          //controller: 'MemberListController'
         },
         'footer': {
           templateUrl: '/views/footer.html'
@@ -32,8 +32,8 @@
           controller: 'NavController'
         },
         'content': {
-          templateUrl: '/views/detail.html',
-          controller: 'MemberRecordController'
+          templateUrl: '/views/detail.html'
+          //controller: 'MemberRecordController'
         },
         'footer': {
           templateUrl: '/views/footer.html'
@@ -50,7 +50,7 @@
         },
         'content': {
           templateUrl: '/views/add-record.html',
-          controller: 'PostNewRecordController'
+          //controller: 'PostNewRecordController'
         },
         'footer': {
           templateUrl: '/views/footer.html'
@@ -63,7 +63,7 @@
       views: {
         'header': {
           templateUrl: '/views/header.html',
-          controller: 'NavController'
+          //controller: 'NavController'
         },
         'content': {
           templateUrl: '/views/about.html',
@@ -78,7 +78,7 @@
       url: '/login',
       views: {
         'content': {
-          templateUrl: '/views/login.html',
+          templateUrl: '/views/login.html'
         }
       }
     })
@@ -88,6 +88,15 @@
       views: {
         'content': {
           templateUrl: '/views/signup.html',
+        }
+      }
+    })
+
+    .state('404', {
+      url: '/404',
+      views: {
+        'content': {
+          templateUrl: '/views/404.html',
         }
       }
     });

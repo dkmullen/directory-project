@@ -36,10 +36,9 @@
         });
     }])
 
-  /*.controller('LogInController', [ '$http', '$scope', '$log', '$stateParams',
-    function($http, $scope, $log, $stateParams) {
-      return redirect('/signup');
-    }])*/
+  .controller('LogInController', [ '$window', function($window) {
+
+    }])
 
   .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$timeout',
     function($scope, $http, $log, $timeout) {

@@ -78,7 +78,8 @@
       url: '/login',
       views: {
         'content': {
-          templateUrl: '/views/login.html'
+          templateUrl: '/views/login.html',
+          controller: 'LogInController'
         }
       }
     })

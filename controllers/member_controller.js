@@ -16,7 +16,6 @@ module.exports = {
     Member.find({}) // Find all members
       // 'members' is what I choose to call what is returned from the find func
       .then(members => res.send(members)) // send it
-      .then(console.log('From member_controller'))
       .catch(next); // in case of err, run the next thing, don't hang up here
   },
 
@@ -56,6 +55,11 @@ module.exports = {
       // 204 = Server has fulfilled the request, & there is no additional info
       .then(member => res.status(204).send(member))
       .catch(next);
+  },
+
+  login(req, res, next) {
+    console.log('logging in');
+    //res.redirect('/#!/login');
   },
 
   // Log in
@@ -108,7 +112,7 @@ module.exports = {
 
     } else {
       // if there is no token
-      return res.redirect('http://morrisonhill.com'); // works in postman, not in the browser
+      return res.redirect('/login'); // works in postman, not in the browser
       /*return res.status(403).send({
         success: false,
         message: 'No token provided.'

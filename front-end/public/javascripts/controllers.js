@@ -2,27 +2,32 @@
 /* These front-end controllers make the requests necessary to build the pages */
 
 (() => {
+
   angular.module('directoryApp') // this only retrieves the module, created in app.js
 
-  .controller('MemberListController', [ '$http', function($http) {
-    let directory = this;
-    directory.members = [];
+  .controller('MemberListController', [ '$http', '$log', '$location',
+    function($http, $log, $location) {
+      let directory = this;
+      directory.members = [];
 
-    /* This gets the list of members from the DB for the home view, binds it to
-       directory.members. MemberListController is called from the home view.
-    */
-    $http.get('/members')
-      .then((data) => {
-        directory.members = data;
-        console.log(directory.members.data);
-      })
-      .catch((err) => {
-        console.log('You got knocked out, man!');
-      });
+      /* This gets the list of members from the DB for the home view, binds it to
+         directory.members. MemberListController is called from the home view.
+      */
+      $http.get('/members')
+        .then((data) => {
+          directory.members = data;
+        })
+        .catch((err) => {
+          if(err.status === 401) {
+            $location.url('/login');        }
+          else {
+            $log.error('Unknown error');
+          }
+        });
   }])
 
-  .controller('MemberRecordController', [ '$http', '$scope', '$log', '$stateParams',
-    function($http, $scope, $log, $stateParams) {
+  .controller('MemberRecordController', [ '$http', '$scope', '$log', '$location', '$stateParams',
+    function($http, $scope, $log, $location, $stateParams) {
       let record = this;
       record.member = [];
       $scope.id = $stateParams.id;
@@ -33,12 +38,24 @@
           record.member = data;
         })
         .catch((err) => {
-          $log.error('You got knocked out, man!');
+          if(err.status === 401) {
+            $location.url('/login');        }
+          else {
+            $log.error('Unknown error');
+          }
         });
     }])
 
-  .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$timeout',
-    function($scope, $http, $log, $timeout) {
+  .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$location', '$timeout',
+    function($scope, $http, $log, $location, $timeout) {
+      $http.get('/add')
+        .catch((err) => {
+          if(err.status === 401) {
+            $location.url('/login');        }
+          else {
+            $log.error('Unknown error');
+          }
+        });
       function clearRecord() {
         let blankRecord = {
           firstName: '',
@@ -85,13 +102,21 @@
           }, 3000);
         })
         .catch((err) => {
-          $log.error('You got knocked out, man!');
+          if(err.status === 401) {
+            $location.url('/login');        }
+          else {
+            $log.error('Unknown error');
+          }
         });
       };
       $scope.clearform = () => {
         $scope.newRecord = clearRecord();
         $scope.newRecordForm.$setPristine();
       };
+      $scope.init = () => {
+
+      };
+      $scope.init();
   }])
 
   // Determines which page we are on so nav pill can be highlighted accordingly
@@ -99,5 +124,5 @@
     $scope.stateis = (currentState) => {
      return $state.is(currentState);
     };
-}]);
+  }]);
 })();

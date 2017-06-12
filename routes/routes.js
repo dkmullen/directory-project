@@ -7,8 +7,7 @@ module.exports = (app) => {
    run this function. Send back the object. In this case, the request is for:
    http://localhost:3000/ - 3000 comes from bin/www  */
 
-  //app.post('/auth', MemberController.gettoken);
-  app.get('/redirect', MemberController.redirect);
+  app.post('/auth', MemberController.gettoken);
   app.use( '/', MemberController.checktoken);
   app.get('/members', MemberController.getall);
   app.post('/members', MemberController.create);
@@ -16,4 +15,6 @@ module.exports = (app) => {
   app.get('/members/:id', MemberController.getone);
   app.put('/members/:id', MemberController.edit);
   app.delete('/members/:id', MemberController.delete);
+
+  app.get('/add', MemberController.loadAddPage);
 };

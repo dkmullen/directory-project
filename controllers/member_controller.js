@@ -57,11 +57,10 @@ module.exports = {
       .catch(next);
   },
 
-  redirect(req, res, next) {
-    console.log('redirecting...');
-    res.status(300).send({ redirect: "$location.url('/login')"})
-      .catch();
+  loadAddPage(req, res, next) {
+    console.log('loadAddPage');
   },
+
 
   // Log in
   gettoken(req, res) {
@@ -113,11 +112,11 @@ module.exports = {
 
     } else {
       // if there is no token
-      return res.get("$location.url('/login')");
-      /*return res.status(401).send({
+      //return res.redirect('http://morrisonhill.com');
+      return res.status(401).send({
         success: false,
         message: 'No token provided.'
-      });*/
+      });
     }
   }
 };

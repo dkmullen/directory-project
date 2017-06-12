@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 // const passportLocalMongoose = require('passport-local-mongoose');
 
 const UserSchema = new Schema({
+  name: { type: String },
   email: { type: String },
   password: { type: String },
   token: { type: String },
@@ -14,6 +15,7 @@ const UserSchema = new Schema({
   }
 });
 
-// Make the model, call it driver, pass in the Schema
 // User.plugin(passportLocalMongoose);
+
+// Make the model, call it UserSchema, pass in the Schema
 module.exports = mongoose.model('User', UserSchema);

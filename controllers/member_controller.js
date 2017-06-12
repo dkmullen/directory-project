@@ -57,27 +57,28 @@ module.exports = {
       .catch(next);
   },
 
+  // The only purpose of this is load the page under checktoken in routes.js
   loadAddPage(req, res, next) {
     console.log('loadAddPage');
   },
 
 
-  // Log in
+  // Log in - needs updated to match a user's sign-in credentials
   gettoken(req, res) {
-    const memberFirstName = req.body.firstName;
-    Member.findOne({ firstName: memberFirstName },
-    (err, member) => {
+    const userEmail = req.body.email;
+    User.findOne({ email: userEmail },
+    (err, user) => {
     if (err) throw err;
-        if (!member) {
+        if (!user) {
         res.json({ success: false, message: 'Authentication failed. User not found.' });
-      } else if (member) {
+      } else if (user) {
         // check if password matches
-        if (member.lastName != req.body.lastName) {
+        if (user.password != req.body.password) {
           res.json({ success: false, message: 'Authentication failed. Wrong lastName.' });
         } else {
           // if member is found and password is right
           // create a token
-          var token = jwt.sign(member, app.get('secretKey'), {
+          var token = jwt.sign(user, app.get('secretKey'), {
             //expiresInMinutes: 1440 // expires in 24 hours - expiresInMinutes not allowed!
           });
           // return the information including token as JSON
@@ -102,7 +103,10 @@ module.exports = {
       // verifies secret and checks exp
       jwt.verify(token, app.get('secretKey'), function(err, decoded) {
         if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' });
+          return res.status(401).send({
+            success: false,
+            message: 'Failed to authenticate token.'
+          });
         } else {
           // if everything is good, save to request for use in other routes
           req.decoded = decoded;
@@ -111,8 +115,7 @@ module.exports = {
       });
 
     } else {
-      // if there is no token
-      //return res.redirect('http://morrisonhill.com');
+      // if there is no token, send 401 to controllers.js on the front-end
       return res.status(401).send({
         success: false,
         message: 'No token provided.'

@@ -17,9 +17,11 @@
         .then((data) => {
           directory.members = data;
         })
+        // Check for a token from MemberController on the back-end
         .catch((err) => {
           if(err.status === 401) {
-            $location.url('/login');        }
+            $location.url('/login'); //redirect to /login view
+          }
           else {
             $log.error('Unknown error');
           }
@@ -37,9 +39,11 @@
         .then((data) => {
           record.member = data;
         })
+        // Check for a token from MemberController on the back-end
         .catch((err) => {
           if(err.status === 401) {
-            $location.url('/login');        }
+            $location.url('/login');
+          }
           else {
             $log.error('Unknown error');
           }
@@ -48,6 +52,7 @@
 
   .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$location', '$timeout',
     function($scope, $http, $log, $location, $timeout) {
+      // Load the page and check for a token from MemberController on the back-end
       $http.get('/add')
         .catch((err) => {
           if(err.status === 401) {
@@ -95,15 +100,18 @@
           $scope.successmessage = true;
           $timeout(() => {
             /* We use 'apply' to add this to the watchlist so the view
-            updates when this model updates */
+            updates when this model updates. This causes the success message to
+            appear for 3 seconds after user posts, then disapper. */
             $scope.$apply(() => {
               $scope.successmessage = false;
             });
           }, 3000);
         })
+        // Might as well check again for a token before submitting the data
         .catch((err) => {
           if(err.status === 401) {
-            $location.url('/login');        }
+            $location.url('/login');
+          }
           else {
             $log.error('Unknown error');
           }

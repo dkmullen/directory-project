@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-// This file contains instruction about what to do with incoming routes.
+/* This backend file extends route.js, defines the jobs each route requires. */
 
 const express = require('express'),
   app = express(),
@@ -57,9 +57,10 @@ module.exports = {
       .catch(next);
   },
 
-  login(req, res, next) {
-    console.log('logging in');
-    //res.redirect('/#!/login');
+  redirect(req, res, next) {
+    console.log('redirecting...');
+    res.status(300).send({ redirect: "$location.url('/login')"})
+      .catch();
   },
 
   // Log in
@@ -112,8 +113,8 @@ module.exports = {
 
     } else {
       // if there is no token
-      return res.redirect('/login'); // works in postman, not in the browser
-      /*return res.status(403).send({
+      return res.get("$location.url('/login')");
+      /*return res.status(401).send({
         success: false,
         message: 'No token provided.'
       });*/

@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+/* These front-end controllers make the requests necessary to build the pages */
 
 (() => {
   angular.module('directoryApp') // this only retrieves the module, created in app.js
@@ -34,10 +35,6 @@
         .catch((err) => {
           $log.error('You got knocked out, man!');
         });
-    }])
-
-  .controller('LogInController', [ '$window', function($window) {
-
     }])
 
   .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$timeout',

@@ -1,9 +1,16 @@
 /*jshint esversion: 6 */
-// This file sets the various app states
+// This file sets the various front-end app states for angular
 
 (() => {
   const app = angular.module('directoryApp', ['ui.router']);
   app.config(($stateProvider, $urlRouterProvider) => {
+
+    /*var checkLoggedin = function($location){
+      // Initialize a new promise
+          $location.url('/login');
+
+    };*/
+
     $stateProvider
 
     .state('main', {
@@ -60,6 +67,9 @@
 
     .state('about', {
       url: '/about',
+      resolve: {
+      //  loggedin: checkLoggedin
+      },
       views: {
         'header': {
           templateUrl: '/views/header.html',
@@ -70,7 +80,7 @@
         },
         'footer': {
           templateUrl: '/views/footer.html'
-        }
+        },
       }
     })
 
@@ -78,8 +88,7 @@
       url: '/login',
       views: {
         'content': {
-          templateUrl: '/views/login.html',
-          controller: 'LogInController'
+          templateUrl: '/views/login.html'
         }
       }
     })

@@ -1,19 +1,56 @@
-<div id="login-container">
+<div ng-controller="LogInController as login" id="login-container">
   <img class="img-responsive login-logo" src=../resources/logo_lg.png />
 
-  <form class="form-horizontal login-form">
-    <div class="form-group">
-      <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+  <form class="form-horizontal login-form"
+      role="form"
+      name="logInForm"
+      ng-submit="logIn()"
+      no-validate>
+
+<!-- Start email field ---------------------------------------------------->
+
+    <div class="form-group"
+            ng-class="{ 'has-success' : !logInForm.email.$invalid,
+              'has-error' : !logInForm.email.$pristine
+              && logInForm.email.$invalid }">
+      <label for="email" class="col-sm-2 control-label">Email</label>
       <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+        <input type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                ng-model="logInCreds.email"
+                placeholder="you@example.com"
+                required />
       </div>
     </div>
-    <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+<!-- End email field ----------------------------------------------------->
+
+<!-- Start password field ------------------------------------------------>
+
+    <div class="form-group"
+            ng-class="{ 'has-success' : !logInForm.password.$invalid,
+              'has-error' : !logInForm.password.$pristine
+              && logInForm.password.$invalid}">
+      <label for="password" class="col-sm-2
+        control-label">Password</label>
       <div class="col-sm-10">
-        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+        <input type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                ng-model="logInCreds.password"
+                placeholder="Password"
+                ng-pattern="pwregex"
+                required />
       </div>
     </div>
+
+<!-- End password field -------------------------------------------------->
+
+<!-- Start checkbox ------------------------------------------------------>
+
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <div class="checkbox">
@@ -23,11 +60,23 @@
         </div>
       </div>
     </div>
+
+<!-- End checkbox -------------------------------------------------------->
+
+<!-- Start buttons ------------------------------------------------------->
+
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <a href ui-sref="main"><button class="btn orange-button">Sign in</button></a>
+        <input type="submit"
+                class="btn orange-button"
+                value="Sign in"
+                ng-disabled="logInForm.$invalid">
+
         <a href ui-sref="signup"><button class="btn brown-button">Or Sign up</button></a>
       </div>
     </div>
+
+<!-- End buttons --------------------------------------------------------->
+
   </form>
 </div>

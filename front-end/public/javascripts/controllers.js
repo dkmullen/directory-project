@@ -113,7 +113,7 @@
             $location.url('/login');
           }
           else {
-            $log.error('Unknown error');
+            $log.error('Unknown error from LogInController');
           }
         });
       };
@@ -121,10 +121,48 @@
         $scope.newRecord = clearRecord();
         $scope.newRecordForm.$setPristine();
       };
-      $scope.init = () => {
+  }])
 
-      };
-      $scope.init();
+  .controller('LogInController', ['$scope', '$http', '$log', function($scope, $http, $log) {
+    function clearRecord() {
+      let blankRecord = {
+        email: '',
+        password: ''
+        };
+        return blankRecord;
+    }
+    $scope.logInCreds = clearRecord();
+    $scope.pwregex = '^.{5,}$'; // Five or more characters
+    $scope.logIn = () => {
+      $http({
+        method: 'POST',
+        url: 'auth', // this is wrong
+        data: $scope.logInCreds,
+        headers : { 'Content-Type': 'application/json' }
+      });
+    };
+  }])
+
+  .controller('SignUpController', ['$scope', '$http', '$log', function($scope, $http, $log) {
+    function clearRecord() {
+      let blankRecord = {
+        name: '',
+        email: '',
+        password: '',
+        password2: ''
+        };
+        return blankRecord;
+    }
+    $scope.signUpCreds = clearRecord();
+    $scope.pwregex = '^.{5,}$'; // Five or more characters
+    $scope.signUp = () => {
+      $http({
+        method: 'POST',
+        url: 'auth', // this is wrong
+        data: $scope.signUpCreds,
+        headers : { 'Content-Type': 'application/json' }
+      });
+    };
   }])
 
   // Determines which page we are on so nav pill can be highlighted accordingly

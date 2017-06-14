@@ -36,6 +36,14 @@ module.exports = {
       .catch(next);
   },
 
+  // Add a new user
+  createuser(req, res, next) {
+    const userProperties = req.body; // const = entire request body sent in
+    User.create(userProperties) // create a new user record out of the const
+      .then(user => res.send(user))
+      .catch(next);
+  },
+
   // Edit just one record
   edit(req, res, next) {
     const memberId = req.params.id;
@@ -74,7 +82,7 @@ module.exports = {
       } else if (user) {
         // check if password matches
         if (user.password != req.body.password) {
-          res.json({ success: false, message: 'Authentication failed. Wrong lastName.' });
+          res.json({ success: false, message: 'Authentication failed. Wrong password.' });
         } else {
           // if member is found and password is right
           // create a token

@@ -136,9 +136,11 @@
     $scope.logIn = () => {
       $http({
         method: 'POST',
-        url: 'auth', // this is wrong
+        url: 'auth',
         data: $scope.logInCreds,
-        headers : { 'Content-Type': 'application/json' }
+        message: console.log($scope.logInCreds),
+        headers : { 'Content-Type': 'application/json' },
+        message2: console.log($http.method)
       });
     };
   }])
@@ -156,9 +158,10 @@
     $scope.signUpCreds = clearRecord();
     $scope.pwregex = '^.{5,}$'; // Five or more characters
     $scope.signUp = () => {
+      $log.info($scope.signUpCreds);
       $http({
         method: 'POST',
-        url: 'auth', // this is wrong
+        url: 'users', // this is wrong
         data: $scope.signUpCreds,
         headers : { 'Content-Type': 'application/json' }
       });

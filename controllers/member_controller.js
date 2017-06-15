@@ -71,7 +71,7 @@ module.exports = {
   },
 
 
-  // Log in - needs updated to match a user's sign-in credentials
+  // Log in
   gettoken(req, res) {
     const userEmail = req.body.email;
     User.findOne({ email: userEmail },
@@ -95,10 +95,15 @@ module.exports = {
             message: 'Enjoy your token!',
             token: token
           });
+          user.set('token', token);
+          user.save();
         }
       }
     });
   },
+
+
+
 
   // route middleware to verify a token
   checktoken(req, res, next) {

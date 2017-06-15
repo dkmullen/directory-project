@@ -87,7 +87,10 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn orange-button">Submit</button>
+        <input type="submit"
+                class="btn orange-button"
+                value="Submit"
+                ng-disabled="signUpForm.$invalid">
       </div>
     </div>
 

@@ -123,26 +123,26 @@
       };
   }])
 
-  .controller('LogInController', ['$scope', '$http', '$log', function($scope, $http, $log) {
-    function clearRecord() {
-      let blankRecord = {
-        email: '',
-        password: ''
-        };
-        return blankRecord;
-    }
-    $scope.logInCreds = clearRecord();
-    $scope.pwregex = '^.{5,}$'; // Five or more characters
-    $scope.logIn = () => {
-      $http({
-        method: 'POST',
-        url: 'auth',
-        data: $scope.logInCreds,
-        message: console.log($scope.logInCreds),
-        headers : { 'Content-Type': 'application/json' },
-        message2: console.log($http.method)
-      });
-    };
+  .controller('LogInController', ['$scope', '$http', '$stateParams','$log',
+    function($scope, $http, $stateParams, $log) {
+      function clearRecord() {
+        let blankRecord = {
+          email: '',
+          password: ''
+          };
+          return blankRecord;
+      }
+      $scope.logInCreds = clearRecord();
+      $scope.pwregex = '^.{5,}$'; // Five or more characters
+      $scope.logIn = () => {
+        $http({
+          method: 'POST',
+          url: 'auth',
+          data: $scope.logInCreds,
+          message: console.log($scope.logInCreds),
+          headers : { 'Content-Type': 'application/json' },
+        });
+      };
   }])
 
   .controller('SignUpController', ['$scope', '$http', '$log', function($scope, $http, $log) {

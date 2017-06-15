@@ -5,12 +5,6 @@
   const app = angular.module('directoryApp', ['ui.router']);
   app.config(($stateProvider, $urlRouterProvider) => {
 
-    /*var checkLoggedin = function($location){
-      // Initialize a new promise
-          $location.url('/login');
-
-    };*/
-
     $stateProvider
 
     .state('main', {

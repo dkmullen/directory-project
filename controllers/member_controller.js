@@ -67,7 +67,6 @@ module.exports = {
 
   // The only purpose of this is load the page under checktoken in routes.js
   loadAddPage(req, res, next) {
-    console.log('loadAddPage');
   },
 
 
@@ -86,30 +85,28 @@ module.exports = {
         } else {
           // if member is found and password is right
           // create a token
-          var token = jwt.sign(user, app.get('secretKey'), {
-            //expiresInMinutes: 1440 // expires in 24 hours - expiresInMinutes not allowed!
-          });
-          // return the information including token as JSON
-          res.json({
-            success: true,
-            message: 'Enjoy your token!',
-            token: token
+          const token = jwt.sign(user, app.get('secretKey'), {
+            expiresIn: 60*60*24 // expires in 24 hours
           });
           user.set('token', token);
           user.save();
+
+          // return the information including token as JSON
+          res.json({
+            success: true,
+            message: console.log('Enjoy your token!'),
+            token: token,
+          });
         }
       }
     });
   },
 
-
-
-
   // route middleware to verify a token
   checktoken(req, res, next) {
+    console.log('Checking token');
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
     // decode token
     if (token) {
 
@@ -131,7 +128,7 @@ module.exports = {
       // if there is no token, send 401 to controllers.js on the front-end
       return res.status(401).send({
         success: false,
-        message: 'No token provided.'
+        message: console.log('No token provided.'),
       });
     }
   }

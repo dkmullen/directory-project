@@ -111,7 +111,7 @@
             $location.url('/login');
           }
           else {
-            $log.error('Unknown error from LogInController');
+            $log.error('Unknown error from PostNewRecordController');
           }
         });
       };
@@ -142,7 +142,7 @@
           };
           return blankRecord;
       }
-      console.log($window.sessionStorage);
+      $scope.errorMessage = false;
       delete $window.sessionStorage.token;
       $scope.logInCreds = clearRecord();
       $scope.pwregex = '^.{5,}$'; // Five or more characters
@@ -163,13 +163,12 @@
           const profile = JSON.parse(url_base64_decode(encodedProfile));
           $location.url('/');
         })
-        .catch((data, status, headers, config) => {
+        .catch((err) => {
           //Erase the token on failure to log in
           delete $window.sessionStorage.token;
-          console.log('Token deleted');
 
           // Write something to handle login errors
-          $scope.message = "Error. Invalid user or pw";
+          $scope.errorMessage = true;
         });
       };
   }])

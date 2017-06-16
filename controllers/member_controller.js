@@ -77,11 +77,11 @@ module.exports = {
     (err, user) => {
     if (err) throw err;
         if (!user) {
-        res.json({ success: false, message: 'Authentication failed. User not found.' });
+        res.json({ success: false, message: 'That email isn\'t in our records' });
       } else if (user) {
         // check if password matches
         if (user.password != req.body.password) {
-          res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+          res.json({ success: false, message: 'I don\'t recognize that password.' });
         } else {
           // if member is found and password is right
           // create a token

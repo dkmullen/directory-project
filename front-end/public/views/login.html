@@ -73,6 +73,10 @@
                 ng-disabled="logInForm.$invalid">
 
         <a href ui-sref="signup"><button class="btn brown-button">Or Sign up</button></a>
+        <br /><br />
+        <span class="error-message"
+                ng-class="{'vis-hidden': !errorMessage}">Invalid email or password.
+        </span>
       </div>
     </div>
 

@@ -88,8 +88,8 @@ module.exports = {
           const token = jwt.sign(user, app.get('secretKey'), {
             expiresIn: 60*60*24 // expires in 24 hours
           });
-          user.set('token', token);
-          user.save();
+          //user.set('token', token);
+          //user.save();
 
           // return the information including token as JSON
           res.json({

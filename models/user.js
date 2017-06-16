@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   name: { type: String },
   email: { type: String },
   password: { type: String },
-  token: { type: String },
+  //token: { type: String },
   admin: {
     type: Boolean,
     default: false

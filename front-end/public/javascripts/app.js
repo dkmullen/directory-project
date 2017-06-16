@@ -67,7 +67,7 @@
       views: {
         'header': {
           templateUrl: '/views/header.html',
-          //controller: 'NavController'
+          controller: 'NavController'
         },
         'content': {
           templateUrl: '/views/about.html',

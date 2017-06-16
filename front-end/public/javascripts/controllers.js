@@ -43,7 +43,7 @@
             $location.url('/login');
           }
           else {
-            $log.error('Unknown error');
+            $log.error('Unknown error from MemberRecordController');
           }
         });
     }])
@@ -122,14 +122,19 @@
   }])
 
   // Determines which page we are on so nav pill can be highlighted accordingly
-  .controller('NavController', ['$scope', '$state', function($scope, $state) {
+  .controller('NavController', ['$scope', '$state', '$window', '$location',
+    function($scope, $state, $window, $location) {
     $scope.stateis = (currentState) => {
      return $state.is(currentState);
     };
+    $scope.logOut = () => {
+      delete $window.sessionStorage;
+      $location.url('/login');
+    };
   }])
 
-  .controller('LogInController', ['$scope', '$http', '$window','$log',
-    function($scope, $http, $window, $log) {
+  .controller('LogInController', ['$scope', '$http', '$window', '$log', '$location',
+    function($scope, $http, $window, $log, $location) {
       function clearRecord() {
         let blankRecord = {
           email: '',
@@ -137,8 +142,11 @@
           };
           return blankRecord;
       }
+      console.log($window.sessionStorage);
+      delete $window.sessionStorage.token;
       $scope.logInCreds = clearRecord();
       $scope.pwregex = '^.{5,}$'; // Five or more characters
+      console.log($window.sessionStorage);
 
       $scope.logIn = () => {
         $http({
@@ -153,6 +161,7 @@
           $scope.isAuthenticated = true;
           const encodedProfile = data.data.token.split('.')[1];
           const profile = JSON.parse(url_base64_decode(encodedProfile));
+          $location.url('/');
         })
         .catch((data, status, headers, config) => {
           //Erase the token on failure to log in
@@ -165,7 +174,8 @@
       };
   }])
 
-  .controller('SignUpController', ['$scope', '$http', '$log', function($scope, $http, $log) {
+  .controller('SignUpController', ['$scope', '$http', '$log', '$location',
+    function($scope, $http, $log, $location) {
     function clearRecord() {
       let blankRecord = {
         name: '',
@@ -185,9 +195,9 @@
         data: $scope.signUpCreds,
         headers : { 'Content-Type': 'application/json' }
       });
+      $location.url('/login');
     };
   }])
-
 
   .factory('authInterceptor', function($rootScope, $q, $window) {
     return {

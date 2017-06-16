@@ -11,7 +11,6 @@ const express = require('express'),
   config = require('./config'),
   member = require('./models/member'),
   routes = require('./routes/routes'),
-  users = require('./routes/users'),
   jwt = require('jsonwebtoken'),
   user = require('./models/user'),
   app = express();

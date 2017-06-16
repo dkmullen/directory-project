@@ -190,7 +190,7 @@
       $log.info($scope.signUpCreds);
       $http({
         method: 'POST',
-        url: 'users', // this is wrong
+        url: 'users',
         data: $scope.signUpCreds,
         headers : { 'Content-Type': 'application/json' }
       });

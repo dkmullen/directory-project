@@ -7,6 +7,10 @@ body, .dropdown-menu {
     max-width: 1024px;
     padding: 25px;
 }
+#searchbox {
+  margin: 0 auto;
+  max-width: 500px;
+}
 #grid-pix {
   display: inline-block;
   margin: 5px 5px 25px 5px;
@@ -99,6 +103,7 @@ footer {
 .vis-hidden {
   visibility: hidden;
 }
+
 
 @media screen and (max-width: 991px) {
     .second-column {

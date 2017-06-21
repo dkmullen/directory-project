@@ -82,19 +82,18 @@ module.exports = {
         // check if password matches
         if (user.password != req.body.password) {
           res.json({ success: false, message: 'I don\'t recognize that password.' });
+
         } else {
           // if member is found and password is right
           // create a token
           const token = jwt.sign(user, app.get('secretKey'), {
             expiresIn: 60*60*24 // expires in 24 hours
           });
-          //user.set('token', token);
-          //user.save();
 
           // return the information including token as JSON
           res.json({
             success: true,
-            message: console.log('Enjoy your token!'),
+            message: 'Enjoy your token!',
             token: token,
           });
         }

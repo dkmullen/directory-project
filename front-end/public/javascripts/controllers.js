@@ -193,8 +193,8 @@
         url: 'users',
         data: $scope.signUpCreds,
         headers : { 'Content-Type': 'application/json' }
-      });
-      $location.url('/login');
+      })
+      .then($location.url('/login'));
     };
   }])
 

@@ -69,35 +69,32 @@ module.exports = {
   loadAddPage(req, res, next) {
   },
 
-
   // Log in
   gettoken(req, res) {
     const userEmail = req.body.email;
     User.findOne({ email: userEmail },
     (err, user) => {
     if (err) throw err;
-        if (!user) {
+    if (!user) {
         res.json({ success: false, message: 'That email isn\'t in our records' });
-      } else if (user) {
-        // check if password matches
-        if (user.password != req.body.password) {
-          res.json({ success: false, message: 'I don\'t recognize that password.' });
-
-        } else {
-          // if member is found and password is right
-          // create a token
-          const token = jwt.sign(user, app.get('secretKey'), {
-            expiresIn: 60*60*24 // expires in 24 hours
-          });
-
-          // return the information including token as JSON
-          res.json({
-            success: true,
-            message: 'Enjoy your token!',
-            token: token,
-          });
-        }
+    } else if (user) {
+      // check if password matches
+      if (user.password != req.body.password) {
+        res.json({ success: false, message: 'I don\'t recognize that password.' });
+      } else {
+        // if member is found and password is right
+        // create a token
+        const token = jwt.sign(user, app.get('secretKey'), {
+          expiresIn: 60*60*24 // expires in 24 hours
+        });
+        // return the information including token as JSON
+        res.json({
+          success: true,
+          message: 'Enjoy your token!',
+          token: token,
+        });
       }
+    }
     });
   },
 

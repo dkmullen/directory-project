@@ -25,6 +25,6 @@ const memberSchema = new Schema({
   }
 });
 
-// Make the model, call it driver, pass in the Schema
+// Make the model, call it member, pass in the Schema
 const Member = mongoose.model('member', memberSchema);
 module.exports = Member;

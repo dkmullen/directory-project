@@ -104,6 +104,7 @@ footer {
 .vis-hidden {
   visibility: hidden;
 }
+/* To override Bootstrap's glow around input fields with my own color */
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
@@ -170,3 +171,10 @@ input[type="color"]:focus,
     max-width: 300px;
   }
 }
+
+/* Palatte
+    Orange: rgb(249, 109, 22) - #F96D16
+    Brown: rgb(116, 106, 100) - #746A64
+    Off-white: rgb(246,245,231) - #F6F5E7
+
+*/

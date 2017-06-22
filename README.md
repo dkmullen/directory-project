@@ -14,3 +14,8 @@ TODO (as of June 16, 2017)
 - Enable photo uploading
 - Enable record-by-record scanning in detail-view
 - Expand schema to group members by household rather than only by individual
+
+### Credits
+Modify color of Bootstrap's box-shadow in CSS:
+https://stackoverflow.com/questions/12200544/override-twitter-bootstrap-textbox-glow-and-shadows
+Solution by: Hawkee - https://stackoverflow.com/users/461272/hawkee

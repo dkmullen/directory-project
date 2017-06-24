@@ -12,18 +12,16 @@
          directory.members. MemberListController is called from the home view.
       */
       $http.get('/members' + '?token=' + $window.sessionStorage.token)
-        .then((data, err) => {
-          if(data) {
-            directory.members = data;
-          } else if(err) {
-            // Check for a token from MemberController on the back-end
-            if(err.status === 401) {
-              $location.url('/login'); //redirect to /login view
-            }
-          }
+        .then((data) => {
+          directory.members = data;
         })
         .catch((err) => {
+          // Check for a token from MemberController on the back-end
+          if(err.status === 401) {
+            $location.url('/login'); //redirect to /login view
+          } else {
             $log.error('Unknown error from MemberListController');
+          }
         });
   }])
 
@@ -35,18 +33,16 @@
 
       // Get a single member, bind it to record,member for detail view
       $http.get('/members/' + $scope.id + '?token=' + $window.sessionStorage.token)
-        .then((data, err) => {
-          if(data) {
-            record.member = data;
-          } else if(err) {
-            // Check for a token from MemberController on the back-end
-            if(err.status === 401) {
-              $location.url('/login'); //redirect to /login view
-            }
-          }
+        .then((data) => {
+          record.member = data;
         })
         .catch((err) => {
-          $log.error('Unknown error from MemberRecordController');
+          // Check for a token from MemberController on the back-end
+          if(err.status === 401) {
+            $location.url('/login'); //redirect to /login view
+          } else {
+            $log.error('Unknown error from MemberRecordController');
+          }
         });
     }])
 
@@ -98,28 +94,26 @@
           data: $scope.newRecord,
           headers : { 'Content-Type': 'application/json' }
         })
-        .then((data, err) => {
-          if(data) {
-            $scope.newRecord = clearRecord();
-            $scope.newRecordForm.$setPristine();
-            $scope.successmessage = true;
-            $timeout(() => {
-              /* We use 'apply' to add this to the watchlist so the view
-              updates when this model updates. This causes the success message to
-              appear for 3 seconds after user posts, then disapper. */
-              $scope.$apply(() => {
-                $scope.successmessage = false;
-              });
-            }, 3000);
-          } else if(err) {
-              // Might as well check again for a token before submitting the data
-              if(err.status === 401) {
-                $location.url('/login');
-              }
-            }
+        .then((data) => {
+          $scope.newRecord = clearRecord();
+          $scope.newRecordForm.$setPristine();
+          $scope.successmessage = true;
+          $timeout(() => {
+            /* We use 'apply' to add this to the watchlist so the view
+            updates when this model updates. This causes the success message to
+            appear for 3 seconds after user posts, then disapper. */
+            $scope.$apply(() => {
+              $scope.successmessage = false;
+            });
+          }, 3000);
         })
         .catch((err) => {
-          $log.error('Unknown error from PostNewRecordController');
+          // Might as well check again for a token before submitting the data
+          if(err.status === 401) {
+            $location.url('/login');
+          } else {
+            $log.error('Unknown error from PostNewRecordController');
+          }
         });
       };
   }])
@@ -202,7 +196,7 @@
         $log.error('Unknown error from SignUpController');
       });
     };
-  }])
+}])
 
   .factory('authInterceptor', function($rootScope, $q, $window) {
     return {

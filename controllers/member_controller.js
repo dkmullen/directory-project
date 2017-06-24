@@ -42,7 +42,7 @@ module.exports = {
     User.create(userProperties) // create a new user record out of the const
       .then(user => res.send(user))
       .catch(next);
-  },
+},
 
   // Edit just one record
   edit(req, res, next) {

@@ -8,7 +8,6 @@ As of June 16, 2017, it is a functional, responsive web app that allows a user t
 To install, clone the repository, install the dependencies with npm, install and run [Mongo](https://www.mongodb.com/download-center?jmp=nav#community) locally and open `localhost:3000` in the browser and it should work. There is a little data (`some-data.json`) that conforms to the schema to get you started.
 
 TODO (as of June 16, 2017)
-- Login: Need separate error messages for email and pw
 - Sign-up: Need checking for already-existing email addresses
 - Fix date-field on forms in iOS
 - Enable photo uploading

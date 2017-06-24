@@ -16,7 +16,7 @@ module.exports = {
     Member.find({}) // Find all members
       // 'members' is what I choose to call what is returned from the find func
       .then(members => res.send(members)) // send it
-      .catch(next); // in case of err, run the next thing, don't hang up here
+      .catch(data => res.send(data)); // in case of err, run the next thing, don't hang up here
   },
 
   // Get just one record by id
@@ -100,7 +100,6 @@ module.exports = {
 
   // route middleware to verify a token
   checktoken(req, res, next) {
-    console.log('Checking token');
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     // decode token
@@ -124,7 +123,7 @@ module.exports = {
       // if there is no token, send 401 to controllers.js on the front-end
       return res.status(401).send({
         success: false,
-        message: console.log('No token provided.'),
+        message: 'No token provided.'
       });
     }
   }

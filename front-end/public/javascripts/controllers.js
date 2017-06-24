@@ -12,17 +12,18 @@
          directory.members. MemberListController is called from the home view.
       */
       $http.get('/members' + '?token=' + $window.sessionStorage.token)
-        .then((data, status, headers, config) => {
-          directory.members = data;
+        .then((data, err) => {
+          if(data) {
+            directory.members = data;
+          } else if(err) {
+            // Check for a token from MemberController on the back-end
+            if(err.status === 401) {
+              $location.url('/login'); //redirect to /login view
+            }
+          }
         })
-        // Check for a token from MemberController on the back-end
         .catch((err) => {
-          if(err.status === 401) {
-            $location.url('/login'); //redirect to /login view
-          }
-          else {
             $log.error('Unknown error from MemberListController');
-          }
         });
   }])
 
@@ -34,17 +35,18 @@
 
       // Get a single member, bind it to record,member for detail view
       $http.get('/members/' + $scope.id + '?token=' + $window.sessionStorage.token)
-        .then((data) => {
-          record.member = data;
+        .then((data, err) => {
+          if(data) {
+            record.member = data;
+          } else if(err) {
+            // Check for a token from MemberController on the back-end
+            if(err.status === 401) {
+              $location.url('/login'); //redirect to /login view
+            }
+          }
         })
-        // Check for a token from MemberController on the back-end
         .catch((err) => {
-          if(err.status === 401) {
-            $location.url('/login');
-          }
-          else {
-            $log.error('Unknown error from MemberRecordController');
-          }
+          $log.error('Unknown error from MemberRecordController');
         });
     }])
 
@@ -56,7 +58,7 @@
           if(err.status === 401) {
             $location.url('/login');        }
           else {
-            $log.error('Unknown error');
+            $log.error('Unknown error from PostNewRecordController');
           }
         });
       function clearRecord() {
@@ -80,6 +82,10 @@
           return blankRecord;
       }
       $scope.newRecord = clearRecord();
+      $scope.clearform = () => {
+        $scope.newRecord = clearRecord();
+        $scope.newRecordForm.$setPristine();
+      };
       $scope.successmessage = false;
       $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
       $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
@@ -92,32 +98,29 @@
           data: $scope.newRecord,
           headers : { 'Content-Type': 'application/json' }
         })
-        .then((data) => {
-          $scope.newRecord = clearRecord();
-          $scope.newRecordForm.$setPristine();
-          $scope.successmessage = true;
-          $timeout(() => {
-            /* We use 'apply' to add this to the watchlist so the view
-            updates when this model updates. This causes the success message to
-            appear for 3 seconds after user posts, then disapper. */
-            $scope.$apply(() => {
-              $scope.successmessage = false;
-            });
-          }, 3000);
+        .then((data, err) => {
+          if(data) {
+            $scope.newRecord = clearRecord();
+            $scope.newRecordForm.$setPristine();
+            $scope.successmessage = true;
+            $timeout(() => {
+              /* We use 'apply' to add this to the watchlist so the view
+              updates when this model updates. This causes the success message to
+              appear for 3 seconds after user posts, then disapper. */
+              $scope.$apply(() => {
+                $scope.successmessage = false;
+              });
+            }, 3000);
+          } else if(err) {
+              // Might as well check again for a token before submitting the data
+              if(err.status === 401) {
+                $location.url('/login');
+              }
+            }
         })
-        // Might as well check again for a token before submitting the data
         .catch((err) => {
-          if(err.status === 401) {
-            $location.url('/login');
-          }
-          else {
-            $log.error('Unknown error from PostNewRecordController');
-          }
+          $log.error('Unknown error from PostNewRecordController');
         });
-      };
-      $scope.clearform = () => {
-        $scope.newRecord = clearRecord();
-        $scope.newRecordForm.$setPristine();
       };
   }])
 
@@ -142,11 +145,10 @@
           };
           return blankRecord;
       }
-      $scope.errorMessage = false;
+      $scope.errorMessage = '';
       delete $window.sessionStorage.token;
       $scope.logInCreds = clearRecord();
       $scope.pwregex = '^.{5,}$'; // Five or more characters
-      console.log($window.sessionStorage);
 
       $scope.logIn = () => {
         $http({
@@ -157,18 +159,20 @@
           headers : { 'Content-Type': 'application/json' },
         })
         .then((data, status, headers, config) => {
-          $window.sessionStorage.token = data.data.token;
-          $scope.isAuthenticated = true;
-          const encodedProfile = data.data.token.split('.')[1];
-          const profile = JSON.parse(url_base64_decode(encodedProfile));
-          $location.url('/');
+          if(data.data.success === true) {
+            $window.sessionStorage.token = data.data.token;
+            $scope.isAuthenticated = true;
+            const encodedProfile = data.data.token.split('.')[1];
+            const profile = JSON.parse(url_base64_decode(encodedProfile));
+            $location.url('/');
+          } else {
+            $scope.errorMessage = data.data.message;
+          }
         })
         .catch((err) => {
           //Erase the token on failure to log in
           delete $window.sessionStorage.token;
-
-          // Write something to handle login errors
-          $scope.errorMessage = true;
+          $scope.errorMessage = 'An error occured. Please refresh the page';
         });
       };
   }])
@@ -187,14 +191,16 @@
     $scope.signUpCreds = clearRecord();
     $scope.pwregex = '^.{5,}$'; // Five or more characters
     $scope.signUp = () => {
-      $log.info($scope.signUpCreds);
       $http({
         method: 'POST',
         url: 'users',
         data: $scope.signUpCreds,
         headers : { 'Content-Type': 'application/json' }
       })
-      .then($location.url('/login'));
+      .then($location.url('/login'))
+      .catch((err) => {
+        $log.error('Unknown error from SignUpController');
+      });
     };
   }])
 

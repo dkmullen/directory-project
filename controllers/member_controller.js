@@ -39,8 +39,15 @@ module.exports = {
   // Add a new user
   createuser(req, res, next) {
     const userProperties = req.body; // const = entire request body sent in
-    User.create(userProperties) // create a new user record out of the const
-      .then(user => res.send(user))
+    User.findOne({ email: userProperties.email})
+      .then((user) => {
+        if(user) {
+          res.json({ success: false, message: 'That email is already registered.'});
+        } else {
+          User.create(userProperties) // create a new user record out of the const
+            .then(user => res.send(user));
+        }
+      })
       .catch(next);
 },
 

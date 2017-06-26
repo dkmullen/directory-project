@@ -191,7 +191,13 @@
         data: $scope.signUpCreds,
         headers : { 'Content-Type': 'application/json' }
       })
-      .then($location.url('/login'))
+      .then((data) => {
+        if(data.data.success === false) {
+          $scope.errorMessage = data.data.message;
+        } else {
+          $location.url('/login');
+        }
+      })
       .catch((err) => {
         $log.error('Unknown error from SignUpController');
       });

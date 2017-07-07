@@ -54,7 +54,7 @@
           if(err.status === 401) {
             $location.url('/login');        }
           else {
-            $log.error('Unknown error from PostNewRecordController');
+            $log.error('Unknown error from PostNewRecordController - Status: ' + err.status);
           }
         });
       function clearRecord() {
@@ -82,9 +82,15 @@
         $scope.newRecord = clearRecord();
         $scope.newRecordForm.$setPristine();
       };
+
+      // Got this from: http://jsfiddle.net/mHVWp/
       $scope.pickImage = () => {
-        console.log('Pick a winner!');
+        let input = $(document.createElement('input'));
+        input.attr("type", "file");
+        input.trigger('click');
+        return false;
       };
+
       $scope.successmessage = false;
       $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
       $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';

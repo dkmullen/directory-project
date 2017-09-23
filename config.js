@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 
-const uri = "mongodb://dkmullen:meThELOU@clusterdir-shard-00-02-jphcz.mongodb.net:27017,clusterdir-shard-00-00-jphcz.mongodb.net:27017,clusterdir-shard-00-01-jphcz.mongodb.net:27017/dir-project?ssl=true&replicaSet=ClusterDIR-shard-0&authSource=admin";
+//const uri = "mongodb://dkmullen:flagUaRm@clusterdir-shard-00-02-jphcz.mongodb.net:27017,clusterdir-shard-00-00-jphcz.mongodb.net:27017,clusterdir-shard-00-01-jphcz.mongodb.net:27017/dir-project?ssl=true&replicaSet=ClusterDIR-shard-0&authSource=admin";
+const uri = process.env.MONGOCLOUD_DIR_CONNECT_STR;
 const uri2 = 'mongodb://localhost:27017/directory-app';
 
 module.exports = {

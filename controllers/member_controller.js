@@ -4,6 +4,7 @@
 const express = require('express'),
   app = express(),
   jwt = require('jsonwebtoken'),
+  bcrypt = require('bcrypt-nodejs'),
   config = require('../config'),
   Member = require('../models/member'),
   User = require('../models/user');
@@ -44,8 +45,19 @@ module.exports = {
         if(user) {
           res.json({ success: false, message: 'That email is already registered.'});
         } else {
-          User.create(userProperties) // create a new user record out of the const
-            .then(user => res.send(user));
+          User.create({
+            name: userProperties.name,
+            email: userProperties.email,
+            password: bcrypt.hashSync(userProperties.password, bcrypt.genSaltSync(10))
+          }, (err, user) => {
+            if (err) {
+              console.log(err);
+              res.status(400).json(err);
+            } else {
+              console.log('User created', user);
+            }
+          })
+          .then(user => res.send(user));
         }
       })
       .catch(next);
@@ -85,8 +97,9 @@ module.exports = {
     if (!user) {
         res.json({ success: false, message: 'That email isn\'t in our records' });
     } else if (user) {
+      console.log(user);
       // check if password matches
-      if (user.password != req.body.password) {
+      if (bcrypt.compareSync(user.password != req.body.password)) {
         res.json({ success: false, message: 'I don\'t recognize that password.' });
       } else {
         // if member is found and password is right

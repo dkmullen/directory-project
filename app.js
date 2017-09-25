@@ -15,7 +15,7 @@ const express = require('express'),
   user = require('./models/user'),
   app = express();
 
-mongoose.connect(config.mongoUrl);
+mongoose.connect(config.mongoUrl, { useMongoClient: true }); 
 mongoose.Promise = global.Promise;
 app.set('secret', config.secret);
 

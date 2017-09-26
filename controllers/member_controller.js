@@ -54,7 +54,7 @@ module.exports = {
               console.log(err);
               res.status(400).json(err);
             } else {
-              console.log('User created', user);
+              console.log('User created');
             }
           })
           .then(user => res.send(user));
@@ -97,9 +97,8 @@ module.exports = {
     if (!user) {
         res.json({ success: false, message: 'That email isn\'t in our records' });
     } else if (user) {
-      console.log(user);
       // check if password matches
-      if (bcrypt.compareSync(user.password != req.body.password)) {
+      if (!bcrypt.compareSync(req.body.password, user.password)) {
         res.json({ success: false, message: 'I don\'t recognize that password.' });
       } else {
         // if member is found and password is right

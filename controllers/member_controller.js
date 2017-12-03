@@ -53,8 +53,6 @@ module.exports = {
             if (err) {
               console.log(err);
               res.status(400).json(err);
-            } else {
-              console.log('User created');
             }
           })
           .then(user => res.send(user));
@@ -92,28 +90,30 @@ module.exports = {
   gettoken(req, res) {
     const userEmail = req.body.email;
     User.findOne({ email: userEmail },
-    (err, user) => {
-    if (err) throw err;
-    if (!user) {
-        res.json({ success: false, message: 'That email isn\'t in our records' });
-    } else if (user) {
-      // check if password matches
-      if (!bcrypt.compareSync(req.body.password, user.password)) {
-        res.json({ success: false, message: 'I don\'t recognize that password.' });
-      } else {
-        // if member is found and password is right
-        // create a token
-        const token = jwt.sign(user, app.get('secretKey'), {
-          expiresIn: 60*60*24 // expires in 24 hours
-        });
-        // return the information including token as JSON
-        res.json({
-          success: true,
-          message: 'Enjoy your token!',
-          token: token,
-        });
+      (err, user) => {
+      if (err) throw err;
+      if (!user) {
+          res.json({ success: false, message: 'That email isn\'t in our records' });
+      } else if (user) {
+        // check if password matches
+        if (!bcrypt.compareSync(req.body.password, user.password)) {
+          res.json({ success: false, message: 'I don\'t recognize that password.' });
+        } else {
+          // if member is found and password is right
+          // create a token
+          const token = jwt.sign(user, app.get('secretKey'), {
+            expiresIn: 60*60*24 // expires in 24 hours
+          });
+          user.token = token; // adds token to user object
+          user.save(); // and saves it to the db, but APPENDS old token. :(
+          // return the information including token as JSON for use on front end?
+          res.json({
+            success: true,
+            message: 'Enjoy your token!',
+            token: token,
+          });
+        }
       }
-    }
     });
   },
 
@@ -145,5 +145,12 @@ module.exports = {
         message: 'No token provided.'
       });
     }
+  },
+
+  deletetoken(req, res, next) {
+    let user = req.body;
+    return user.update({
+     $pull: {token}
+    });
   }
 };

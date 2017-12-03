@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
-const uri = process.env.MONGOCLOUD_DIR_CONNECT_STR;
-const uri2 = 'mongodb://localhost:27017/directory-app';
+const uri = process.env.MONGOCLOUD_DIR_CONNECT_STR ||
+  'mongodb://localhost:27017/directory-app';
 
 module.exports = {
     'secret': 'fakesecret',

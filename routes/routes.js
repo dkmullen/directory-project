@@ -19,6 +19,7 @@ module.exports = (app) => {
   app.get('/members/:id', MemberController.getone);
   app.put('/members/:id', MemberController.edit);
   app.delete('/members/:id', MemberController.delete);
+  app.delete('/users/me/token', MemberController.deletetoken);
 
   // The only use for this is to get the add page to load under checktoken, above
   app.get('/add', MemberController.loadAddPage);

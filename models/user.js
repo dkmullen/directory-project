@@ -8,14 +8,20 @@ const UserSchema = new Schema({
   name: { type: String },
   email: { type: String },
   password: { type: String },
-  //token: { type: String },
   admin: {
     type: Boolean,
     default: false
+  },
+  token: {
+    type: String
   }
 });
 
 // User.plugin(passportLocalMongoose);
+
+UserSchema.methods.updateUser = function() {
+
+};
 
 // Make the model, call it UserSchema, pass in the Schema
 module.exports = mongoose.model('User', UserSchema);

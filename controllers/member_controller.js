@@ -3,15 +3,13 @@
 
 const express = require('express'),
   app = express(),
-  jwt = require('jsonwebtoken'),
-  bcrypt = require('bcrypt-nodejs'),
   config = require('../config'),
-  Member = require('../models/member'),
-  User = require('../models/user');
+  Member = require('../models/member');
 
 app.set('secretKey', config.secret);
 
 module.exports = {
+
   // Get all the records
   getall(req, res, next) {
     Member.find({}) // Find all members
@@ -37,30 +35,6 @@ module.exports = {
       .catch(next);
   },
 
-  // Add a new user
-  createuser(req, res, next) {
-    const userProperties = req.body; // const = entire request body sent in
-    User.findOne({ email: userProperties.email})
-      .then((user) => {
-        if(user) {
-          res.json({ success: false, message: 'That email is already registered.'});
-        } else {
-          User.create({
-            name: userProperties.name,
-            email: userProperties.email,
-            password: bcrypt.hashSync(userProperties.password, bcrypt.genSaltSync(10))
-          }, (err, user) => {
-            if (err) {
-              console.log(err);
-              res.status(400).json(err);
-            }
-          })
-          .then(user => res.send(user));
-        }
-      })
-      .catch(next);
-},
-
   // Edit just one record
   edit(req, res, next) {
     const memberId = req.params.id;
@@ -80,77 +54,10 @@ module.exports = {
       // 204 = Server has fulfilled the request, & there is no additional info
       .then(member => res.status(204).send(member))
       .catch(next);
-  },
+  }
 
   // The only purpose of this is load the page under checktoken in routes.js
-  loadAddPage(req, res, next) {
-  },
-
-  // Log in
-  gettoken(req, res) {
-    const userEmail = req.body.email;
-    User.findOne({ email: userEmail },
-      (err, user) => {
-      if (err) throw err;
-      if (!user) {
-          res.json({ success: false, message: 'That email isn\'t in our records' });
-      } else if (user) {
-        // check if password matches
-        if (!bcrypt.compareSync(req.body.password, user.password)) {
-          res.json({ success: false, message: 'I don\'t recognize that password.' });
-        } else {
-          // if member is found and password is right
-          // create a token
-          const token = jwt.sign(user, app.get('secretKey'), {
-            expiresIn: 60*60*24 // expires in 24 hours
-          });
-          user.token = token; // adds token to user object
-          user.save(); // and saves it to the db, but APPENDS old token. :(
-          // return the information including token as JSON for use on front end?
-          res.json({
-            success: true,
-            message: 'Enjoy your token!',
-            token: token,
-          });
-        }
-      }
-    });
-  },
-
-  // route middleware to verify a token
-  checktoken(req, res, next) {
-    // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    // decode token
-    if (token) {
-
-      // verifies secret and checks exp
-      jwt.verify(token, app.get('secretKey'), function(err, decoded) {
-        if (err) {
-          return res.status(401).send({
-            success: false,
-            message: 'Failed to authenticate token.'
-          });
-        } else {
-          // if everything is good, save to request for use in other routes
-          req.decoded = decoded;
-          next();
-        }
-      });
-
-    } else {
-      // if there is no token, send 401 to controllers.js on the front-end
-      return res.status(401).send({
-        success: false,
-        message: 'No token provided.'
-      });
-    }
-  },
-
-  deletetoken(req, res, next) {
-    let user = req.body;
-    return user.update({
-     $pull: {token}
-    });
-  }
+  // loadAddPage() {
+  //   console.log('Loading add page???');
+  // }
 };

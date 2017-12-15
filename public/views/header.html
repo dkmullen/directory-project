@@ -1,4 +1,4 @@
-<header>
+<header ng-controller="NavController as nav">
   <div class="row">
     <div class="col-xs-5">
       <a href ui-sref="main">
@@ -18,7 +18,7 @@
         <li ng-class="{active: stateis('main')}"><a href ui-sref="main">Home</a></li>
         <li ng-class="{active: stateis('addnew')}"><a href ui-sref="addnew">Add Record</a></li>
         <li ng-class="{active: stateis('about')}"><a href ui-sref="about">About Us</a></li>
-        <li><a href ui-sref="login">Log out</a></li>
+        <li ng-click="logOut()"><a href="">Log out</a></li>
       </ul>
 
 <!-- The dropdown nav that is toggled by the hamburger button on a small screen -->

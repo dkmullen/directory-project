@@ -5,13 +5,10 @@ const express = require('express'),
   logger = require('morgan'),
   bodyParser = require('body-parser'),
   mongoose = require('mongoose'),
-  jwt = require('jsonwebtoken'),
-  passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy,
 
   config = require('./config'),
-  member = require('./models/member'),
   routes = require('./routes/routes'),
+  member = require('./models/member'),
   user = require('./models/user'),
 
   app = express();
@@ -20,18 +17,18 @@ mongoose.connect(config.mongoUrl, { useMongoClient: true });
 mongoose.Promise = global.Promise;
 app.set('secret', config.secret);
 
-app.use(favicon(path.join(__dirname, '/public/resources', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public/resources', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/routes', routes);
 
 routes(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -41,10 +38,6 @@ app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
 });
 
 module.exports = app;

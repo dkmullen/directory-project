@@ -13,6 +13,10 @@ if (env === 'development') {
 }
 
 module.exports = {
+    jwtSecret: '',
+    jwtSession: {
+      session: false
+    },
     'secret': process.env.JWT_SECRET,
     'mongoUrl' : process.env.MONGODB_URI
 };

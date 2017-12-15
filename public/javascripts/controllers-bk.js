@@ -11,20 +11,18 @@
       /* This gets the list of members from the DB for the home view, binds it to
          directory.members. MemberListController is called from the home view.
       */
-      $http.get('/members', {
-        headers: { 'x-access-token': $window.sessionStorage.token }
-      })
-      .then((data) => {
-        directory.members = data;
-      })
-      .catch((err) => {
-        // Check for a token from MemberController on the back-end
-        if(err.status === 401) {
-          $location.url('/login'); //redirect to /login view
-        } else {
-          $log.error('Unknown error from MemberListController');
-        }
-      });
+      $http.get('/members' + '?token=' + $window.sessionStorage.token)
+        .then((data) => {
+          directory.members = data;
+        })
+        .catch((err) => {
+          // Check for a token from MemberController on the back-end
+          if(err.status === 401) {
+            $location.url('/login'); //redirect to /login view
+          } else {
+            $log.error('Unknown error from MemberListController');
+          }
+        });
   }])
 
   .controller('MemberRecordController', [ '$http', '$scope', '$log', '$location', '$stateParams', '$window',
@@ -34,35 +32,31 @@
       $scope.id = $stateParams.id;
 
       // Get a single member, bind it to record,member for detail view
-      $http.get('/members/', {
-        headers: { 'x-access-token': $window.sessionStorage.token }
-      })
-      .then((data) => {
-        record.member = data;
-      })
-      .catch((err) => {
-        // Check for a token from MemberController on the back-end
-        if(err.status === 401) {
-          $location.url('/login'); //redirect to /login view
-        } else {
-          $log.error('Unknown error from MemberRecordController');
-        }
-      });
+      $http.get('/members/' + $scope.id + '?token=' + $window.sessionStorage.token)
+        .then((data) => {
+          record.member = data;
+        })
+        .catch((err) => {
+          // Check for a token from MemberController on the back-end
+          if(err.status === 401) {
+            $location.url('/login'); //redirect to /login view
+          } else {
+            $log.error('Unknown error from MemberRecordController');
+          }
+        });
     }])
 
   .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$location', '$timeout', '$window',
     function($scope, $http, $log, $location, $timeout, $window) {
       // Load the page and check for a token from MemberController on the back-end
-      $http.get('/add', {
-        headers: { 'x-access-token': $window.sessionStorage.token }
-      })
-      .catch((err) => {
-        if(err.status === 401) {
-          $location.url('/login');        }
-        else {
-          $log.error('Unknown error from PostNewRecordController - Status: ' + err.status);
-        }
-      });
+      $http.get('/add' + '?token=' + $window.sessionStorage.token)
+        .catch((err) => {
+          if(err.status === 401) {
+            $location.url('/login');        }
+          else {
+            $log.error('Unknown error from PostNewRecordController - Status: ' + err.status);
+          }
+        });
       function clearRecord() {
         let blankRecord = {
           firstName: '',
@@ -105,12 +99,9 @@
       $scope.saveNewRecord = () => {
         $http({
           method: 'POST',
-          url: 'members',
+          url: 'members' + '?token=' + $window.sessionStorage.token,
           data: $scope.newRecord,
-          headers : {
-            'Content-Type': 'application/json',
-              'x-access-token': $window.sessionStorage.token
-          }
+          headers : { 'Content-Type': 'application/json' }
         })
         .then((data) => {
           $scope.newRecord = clearRecord();
@@ -145,16 +136,13 @@
     $scope.logOut = () => {
       $http({
         method: 'DELETE',
-        url: '/users/me/token',
-        headers : {
-          'Content-Type': 'application/json',
-          'x-access-token': $window.sessionStorage.token
-        }
+        url: '/users/me/token' + '?token=' + $window.sessionStorage.token,
+        data: '',
+        headers : { 'Content-Type': 'application/json' }
       })
       .then(() => {
-        $log.info('Ima out');
         delete $window.sessionStorage.token;
-        console.log('token is ' + $window.sessionStorage.token);
+        console.log($window.sessionStorage.token);
         $location.url('/login');
       })
       .catch((err) => {
@@ -164,6 +152,8 @@
           $log.error('Unknown error from logOut() in NavController - Status: ' + err.status);
         }
       });
+
+      console.log('Ima out');
     };
   }])
 
@@ -239,7 +229,7 @@
         $log.error('Unknown error from SignUpController');
       });
     };
-  }])
+}])
 
   .factory('authInterceptor', function($rootScope, $q, $window) {
     return {

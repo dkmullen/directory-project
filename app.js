@@ -3,28 +3,28 @@ const express = require('express'),
   path = require('path'),
   favicon = require('serve-favicon'),
   logger = require('morgan'),
-  cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   mongoose = require('mongoose'),
+  jwt = require('jsonwebtoken'),
   passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
+
   config = require('./config'),
   member = require('./models/member'),
   routes = require('./routes/routes'),
-  jwt = require('jsonwebtoken'),
   user = require('./models/user'),
+
   app = express();
 
-mongoose.connect(config.mongoUrl, { useMongoClient: true }); 
+mongoose.connect(config.mongoUrl, { useMongoClient: true });
 mongoose.Promise = global.Promise;
 app.set('secret', config.secret);
 
-app.use(favicon(path.join(__dirname, 'front-end/public/resources', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '/public/resources', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'front-end/public')));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use('/routes', routes);
 
 routes(app);

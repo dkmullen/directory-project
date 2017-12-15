@@ -1,16 +1,20 @@
 {
-  "name": "dirapp-back-end",
+  "name": "dirapp",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "angular": "^1.6.4",
+    "angular-resource": "^1.6.4",
+    "angular-ui-router": "^0.4.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.17.1",
-    "cookie-parser": "~1.4.3",
+    "bootstrap": "^3.3.7",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "jquery-slim": "^3.0.0",
     "jsonwebtoken": "^7.4.0",
     "method-override": "^2.3.8",
     "mongoose": "^4.9.5",
@@ -21,6 +25,6 @@
     "serve-favicon": "~2.4.2"
   },
   "engines": {
-    "node": "6.11.1 "
+    "node": "8.9.3 "
   }
 }

@@ -6,7 +6,6 @@ const express = require('express'),
   jwt = require('jsonwebtoken'),
   bcrypt = require('bcrypt-nodejs'),
   config = require('../config'),
-  Member = require('../models/member'),
   User = require('../models/user');
 
 app.set('secretKey', config.secret);
@@ -36,7 +35,7 @@ module.exports = {
       .catch(next);
   },
 
-  // app.get('/users/me') to check my own id (ie, in Postman)
+  // Get my user record ('/users/me') to check my own id (ie, in Postman)
   getme(req, res, next) {
     User.findOne({token: req.headers['x-access-token']})
     .then((user) => {
@@ -45,8 +44,6 @@ module.exports = {
    .catch((e) => {
      res.status(400).send(e);
    });
-
-
   },
 
   // Log in (app.post('/auth'))

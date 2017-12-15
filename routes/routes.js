@@ -10,8 +10,8 @@ module.exports = (app) => {
    http://localhost:3000/ - 3000 comes from bin/www  */
 
   app.post('/users', UserController.createuser);
-
   app.post('/auth', UserController.gettoken);
+
   app.use( '/', UserController.checktoken);
 
   app.get('/members', MemberController.getall);
@@ -25,5 +25,5 @@ module.exports = (app) => {
 
   app.get('/users/me', UserController.getme);
   // The only use for this is to get the add page to load under checktoken, above
-  // app.get('/add', MemberController.loadAddPage);
+  app.get('/add', MemberController.loadAddPage);
 };

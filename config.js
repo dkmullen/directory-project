@@ -17,7 +17,7 @@ module.exports = {
     jwtSession: {
       session: false
     },
-    'secret': process.env.JWT_SECRET,
+    'secret' : process.env.JWT_SECRET,
     'mongoUrl' : process.env.MONGODB_URI
 };
 // To start mongo on Windows - "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe"

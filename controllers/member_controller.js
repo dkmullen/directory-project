@@ -1,12 +1,7 @@
 /*jshint esversion: 6 */
 /* This backend file extends route.js, defines the jobs each route requires. */
 
-const express = require('express'),
-  app = express(),
-  config = require('../config'),
-  Member = require('../models/member');
-
-app.set('secretKey', config.secret);
+const Member = require('../models/member');
 
 module.exports = {
 
@@ -54,10 +49,10 @@ module.exports = {
       // 204 = Server has fulfilled the request, & there is no additional info
       .then(member => res.status(204).send(member))
       .catch(next);
-  }
+  },
 
   // The only purpose of this is load the page under checktoken in routes.js
-  // loadAddPage() {
-  //   console.log('Loading add page???');
-  // }
+  loadAddPage(req, res) {
+    res.send();
+  }
 };

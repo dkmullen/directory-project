@@ -33,8 +33,8 @@
       record.member = [];
       $scope.id = $stateParams.id;
 
-      // Get a single member, bind it to record,member for detail view
-      $http.get('/members/', {
+      // Get a single member, bind it to record.member for detail view
+      $http.get('/members/' + $scope.id, {
         headers: { 'x-access-token': $window.sessionStorage.token }
       })
       .then((data) => {

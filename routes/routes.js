@@ -13,7 +13,7 @@ module.exports = (app) => {
   app.post('/auth', UserController.gettoken);
 
   app.use( '/', UserController.checktoken);
-
+  app.get('/members/me', MemberController.getme);
   app.get('/members', MemberController.getall);
   app.post('/members', MemberController.create);
 
@@ -24,6 +24,7 @@ module.exports = (app) => {
   app.delete('/users/me/token', UserController.deletetoken);
 
   app.get('/users/me', UserController.getme);
+
   app.get('/users', UserController.getallusers);
 
   // The only use for this is to get the add page to load under checktoken, above

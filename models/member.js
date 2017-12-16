@@ -22,7 +22,8 @@ const memberSchema = new Schema({
   image: {
      full: {type: String, default: '../resources/img_soon.jpg' },
      thumb: { type: String, default: '../resources/img_soon.jpg'}
-  }
+  },
+  _creator: { type: mongoose.Schema.Types.ObjectId, required: true }
 });
 
 // Make the model, call it member, pass in the Schema

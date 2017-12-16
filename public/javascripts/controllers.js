@@ -177,7 +177,10 @@
           return blankRecord;
       }
       $scope.errorMessage = '';
-      delete $window.sessionStorage.token;
+      if ($window.sessionStorage.token) {
+        $location.url('/');
+      }
+
       $scope.logInCreds = clearRecord();
       $scope.pwregex = '^.{5,}$'; // Five or more characters
 

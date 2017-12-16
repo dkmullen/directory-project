@@ -17,8 +17,6 @@ const UserSchema = new Schema({
   }
 });
 
-// User.plugin(passportLocalMongoose);
-
 UserSchema.methods.updateUser = function() {
 
 };

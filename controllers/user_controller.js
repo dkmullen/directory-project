@@ -46,6 +46,13 @@ module.exports = {
    });
   },
 
+  // Get my user record ('/users/me') to check my own id (ie, in Postman)
+  getallusers(req, res, next) {
+    User.find({})
+    .then(members => res.send(members)) // send it
+    .catch(data => res.send(data)); // in case of err, run the next thing, don't hang up here
+  },
+
   // Log in (app.post('/auth'))
   gettoken(req, res) {
     const userEmail = req.body.email;

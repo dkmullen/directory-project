@@ -24,6 +24,8 @@ module.exports = (app) => {
   app.delete('/users/me/token', UserController.deletetoken);
 
   app.get('/users/me', UserController.getme);
+  app.get('/users', UserController.getallusers);
+
   // The only use for this is to get the add page to load under checktoken, above
   app.get('/add', MemberController.loadAddPage);
 };

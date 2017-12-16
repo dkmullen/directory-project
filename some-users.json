@@ -1,0 +1,92 @@
+[
+    {
+        "_id": "5a2479bed0e62f0425785b4e",
+        "name": "Joker",
+        "email": "joker@usmc.mil",
+        "password": "$2a$10$DQHjyrcJJZ4B6GdSxJpL5OM9z/jkg1DRV10eXn.c29FrFzwSEIgiK",
+        "__v": 0,
+        "token": "",
+        "admin": false
+    },
+    {
+        "_id": "5a331716858ffb124e325127",
+        "name": "Animal Mother",
+        "email": "animal@usmc.mil",
+        "password": "$2a$10$cOFBQcUlQvDWnFYucHWxcejMQq0.eCw9wKl3ctKGlvtTWslv9HJbW",
+        "__v": 0,
+        "admin": false
+    },
+    {
+        "_id": "5a3465c4137d2f5bb6608c94",
+        "name": "Joe Charboneau",
+        "email": "joe@joe.com",
+        "password": "$2a$10$GOYmKjqsWGKFg7Y7oM1ly.elXOxs2SfFfDFiGpn004EiKix3pIA2W",
+        "__v": 0,
+        "admin": false
+    },
+    {
+        "_id": "5a3466f8137d2f5bb6608c95",
+        "name": "Deanna Roberts",
+        "email": "queenie@oke.com",
+        "password": "$2a$10$DyAXH9uLK6pJsL4hmKCGfuf546pRxLCJdVgCswFjspjxtd64pYo56",
+        "__v": 0,
+        "admin": false
+    },
+    {
+        "_id": "5a34677a137d2f5bb6608c96",
+        "name": "Jane Err",
+        "email": "jane@jane.com",
+        "password": "$2a$10$PKtnZv7oVQSsjr3aO6NKXugj2UK4uGpPG3qlLMKneim1E/6vb30mC",
+        "__v": 0,
+        "admin": false
+    },
+    {
+        "_id": "5a3467f1137d2f5bb6608c97",
+        "name": "Robinson Carousel",
+        "email": "rc@harriman.com",
+        "password": "$2a$10$JxBxaLual64yfbQC6Gs0ReBG0EbU9/IEpvERdbCS2haWRe.twt8di",
+        "__v": 0,
+        "admin": false
+    },
+    {
+        "_id": "5a34684a137d2f5bb6608c98",
+        "name": "Makayla Williamson",
+        "email": "onmyway@oke.com",
+        "password": "$2a$10$gbx6.gP9yawaUGK2WiQnauAA0man04cz421YSd9hQafk2cdGnQCcu",
+        "__v": 0,
+        "admin": false
+    },
+    {
+        "_id": "5a346894137d2f5bb6608c99",
+        "name": "Jason Object",
+        "email": "jsonp@gmail.cc",
+        "password": "$2a$10$1a1PH4iwJoXkD9mwdgjs1etUTdzzthaf9tB9JXIgt7n5R0Jkps5FK",
+        "__v": 0,
+        "admin": false
+    },
+    {
+        "_id": "5a3468db137d2f5bb6608c9a",
+        "name": "Duncan Idaho",
+        "email": "duncan@dune.com",
+        "password": "$2a$10$VItZKg1TdG3OZO3DKLmV5OuMAqWfmYILDx7oBRXkHGVMfJdaX5zme",
+        "__v": 0,
+        "admin": false
+    },
+    {
+        "_id": "5a346935137d2f5bb6608c9b",
+        "name": "N.G. Controller",
+        "email": "rogerthat@yahoo.com",
+        "password": "$2a$10$7sFIqYkdqWwg5IRmeNA0heNBMaAsIYJ0a.6PmMOqAbi0fFncT2CWa",
+        "__v": 0,
+        "admin": false
+    },
+    {
+        "_id": "5a346987137d2f5bb6608c9c",
+        "name": "Jean Claude Pouros",
+        "email": "jcp@harriman.com",
+        "password": "$2a$10$V/LhnXoug2wTeYk8sXActeWRimobSlTOup0qFuxnqmybZ48XFJHAu",
+        "__v": 0,
+        "token": "",
+        "admin": false
+    }
+]

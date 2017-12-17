@@ -63,30 +63,56 @@
           $log.error('Unknown error from PostNewRecordController - Status: ' + err.status);
         }
       });
+
       function clearRecord() {
-        let blankRecord = {
-          firstName: '',
-          lastName: '',
-          dateOfBirth: '',
-          email: '',
-          phone: {
-            phoneNumber: '',
-            textCapable: ''
-          },
-          address: {
-            streetOne: '',
-            streetTwo: '',
-            city: '',
-            state: 'TN',
-            zip: ''
-            }
-          };
-          return blankRecord;
+        $http({
+          method: 'GET',
+          url: 'members/me',
+          headers : {
+            'Content-Type': 'application/json',
+              'x-access-token': $window.sessionStorage.token
+          }
+        })
+        .then((data) => {
+          let my = data.data;
+          console.log(my.dateOfBirth || 'fail', my.phone.textCapable);
+          if (my === {}) {
+            console.log('whatevs');
+          } else {
+            let myRecord = {
+              firstName: my.firstName || '',
+              lastName: my.lastName || '',
+              dateOfBirth: my.dateOfBirth || '',
+              email: my.email || '',
+              phone: {
+                phoneNumber: my.phone.phoneNumber || '',
+                textCapable: my.phone.textCapable || ''
+              },
+              address: {
+                streetOne: my.address.streetOne || '',
+                streetTwo: my.address.streetTwo || '',
+                city: my.address.city || '',
+                state: my.address.state,
+                zip: my.address.zip || ''
+                }
+              };
+              $scope.newRecord = myRecord;
+          }
+        })
+        .catch((err) => {
+          // Might as well check again for a token before submitting the data
+          if(err.status === 401) {
+            $location.url('/login');
+          } else {
+            $log.error('Unknown error from PostNewRecordController');
+          }
+        });
       }
-      $scope.newRecord = clearRecord();
+
+      clearRecord();
       $scope.clearform = () => {
         $scope.newRecord = clearRecord();
-        $scope.newRecordForm.$setPristine();
+        // $scope.newRecordForm.$setPristine();
       };
 
       // Got this from: http://jsfiddle.net/mHVWp/
@@ -114,7 +140,7 @@
         })
         .then((data) => {
           $scope.newRecord = clearRecord();
-          $scope.newRecordForm.$setPristine();
+          // $scope.newRecordForm.$setPristine();
           $scope.successmessage = true;
           $timeout(() => {
             /* We use 'apply' to add this to the watchlist so the view

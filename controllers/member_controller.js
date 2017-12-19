@@ -42,7 +42,29 @@ module.exports = {
 
   // Create a new record
   create(req, res, next) {
-    const memberProperties = req.body; // const = entire request body sent in
+    const memberProperties = {
+      firstName: req.body.firstname,
+      lastName: req.body.lastName,
+      dateOfBirth: req.body.dateOfBirth,
+      email: req.body.email,
+      phone: {
+        phoneNumber: req.body.phone.phoneNumber,
+        textCapable: req.body.phone.textCapable
+      },
+      address: {
+        streetOne: req.body.address.streetOne,
+        streetTwo: req.body.address.streetTwo,
+        city: req.body.address.city,
+        state: req.body.address.state,
+        zip: req.body.address.zip
+      },
+      image: {
+        thumb: req.body.image.thumb,
+        full: req.body.image.full
+    },
+      _creator: req.body.user._id
+    };
+    console.log(memberProperties);
     Member.create(memberProperties) // create a new mem record out of the const
       .then(member => res.send(member))
       .catch(next);

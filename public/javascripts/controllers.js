@@ -76,7 +76,9 @@
         .then((data) => {
           let my = data.data;
           console.log(my.dateOfBirth || 'fail', my.phone.textCapable);
-    
+          if (my === {}) {
+            console.log('whatevs');
+          } else {
             let myRecord = {
               firstName: my.firstName || '',
               lastName: my.lastName || '',
@@ -95,7 +97,7 @@
                 }
               };
               $scope.newRecord = myRecord;
-
+          }
         })
         .catch((err) => {
           // Might as well check again for a token before submitting the data

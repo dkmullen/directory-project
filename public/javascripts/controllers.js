@@ -53,7 +53,7 @@
   .controller('UpdateRecordController', [ '$scope', '$http', '$log', '$location', '$timeout', '$window',
     function($scope, $http, $log, $location, $timeout, $window) {
       // Load the page and check for a token from MemberController on the back-end
-      $http.get('/add', {
+      $http.get('/update', {
         headers: { 'x-access-token': $window.sessionStorage.token }
       })
       .catch((err) => {
@@ -86,20 +86,22 @@
               email: my.email || '',
               phone: {
                 phoneNumber: my.phone.phoneNumber || '',
-                textCapable: my.phone.textCapable
+                textCapable: my.phone.textCapable || ''
               },
               address: {
                 streetOne: my.address.streetOne || '',
                 streetTwo: my.address.streetTwo || '',
                 city: my.address.city || '',
-                state: my.address.state,
+                state: my.address.state || 'TN',
                 zip: my.address.zip || ''
               },
               _id: my._id,
               image: {
-                full: my.image.full
+                full: my.image.full || '',
+                thumb: my.image.thumb || ''
               }
             };
+            console.log(myRecord);
             $scope.myRecord = myRecord;
           }
         })
@@ -107,14 +109,19 @@
           if(err.status === 401) {
             $location.url('/login');
           } else {
-            $log.error('Unknown error from EditRecordController on loading record - ' + err);
+            $log.error('Unknown error from UpdateRecordController on loading record - ' + err);
           }
         });
       }
 
       populateRecord();
-      $scope.resetform = () => {
-        $scope.myRecord = populateRecord();
+
+      // $scope.resetform = () => {
+      //   $scope.myRecord = populateRecord();
+      // };
+
+      $scope.cancel = () => {
+        $location.url('/member' + $scope.myRecord._id);
       };
 
       // Got this from: http://jsfiddle.net/mHVWp/
@@ -140,17 +147,8 @@
               'x-access-token': $window.sessionStorage.token
           }
         })
-        .then((data) => {
-          $scope.myRecord = populateRecord();
-          $scope.successmessage = true;
-          $timeout(() => {
-            /* We use 'apply' to add this to the watchlist so the view
-            updates when this model updates. This causes the success message to
-            appear for 3 seconds after user posts, then disapper. */
-            $scope.$apply(() => {
-              $scope.successmessage = false;
-            });
-          }, 3000);
+        .then(() => {
+          $location.url('/member' + $scope.myRecord._id);
         })
         .catch((err) => {
           // Might as well check again for a token before submitting the data
@@ -317,7 +315,7 @@
         if(err.status === 401) {
           $location.url('/login');        }
         else {
-          $log.error('Unknown error from logOut() in NavController - Status: ' + err.status);
+          $log.error('Unknown error from logOut() in NavController - Status: ' + err);
         }
       });
     };

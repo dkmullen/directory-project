@@ -28,6 +28,6 @@ module.exports = (app) => {
   app.get('/users', UserController.getallusers);
 
   // The only use for this is to get the add page to load under checktoken, above
-  app.get('/add', MemberController.loadAddPage);
+  // app.get('/add', MemberController.loadAddPage);
   app.get('/update', MemberController.loadUpdatePage);
 };

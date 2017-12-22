@@ -75,17 +75,18 @@
         })
         .then((data) => {
           let my = data.data;
+          console.log(my);
           if (Object.keys(my).length === 0) { // ie, if object is empty
             console.log('redirect');
           } else {
             let myRecord = {
               firstName: my.firstName || '',
               lastName: my.lastName || '',
-              // dateOfBirth: my.dateOfBirth || '',
+              dateOfBirth: new Date(my.dateOfBirth),
               email: my.email || '',
               phone: {
                 phoneNumber: my.phone.phoneNumber || '',
-                // textCapable: my.phone.textCapable || ''
+                textCapable: my.phone.textCapable
               },
               address: {
                 streetOne: my.address.streetOne || '',
@@ -94,7 +95,10 @@
                 state: my.address.state,
                 zip: my.address.zip || ''
               },
-              _id: my._id
+              _id: my._id,
+              image: {
+                full: my.image.full
+              }
             };
             $scope.myRecord = myRecord;
           }

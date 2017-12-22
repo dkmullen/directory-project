@@ -59,6 +59,23 @@
       }
     })
 
+    .state('updateme', {
+      url: '/update',
+      views: {
+        'header': {
+          templateUrl: '/views/header.html',
+          controller: 'NavController'
+        },
+        'content': {
+          templateUrl: '/views/update-record.html',
+          //controller: 'UpdateRecordController'
+        },
+        'footer': {
+          templateUrl: '/views/footer.html'
+        }
+      }
+    })
+
     .state('about', {
       url: '/about',
       resolve: {

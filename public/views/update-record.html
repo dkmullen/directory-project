@@ -4,8 +4,8 @@
       <input type="image"
             class="img-responsive placeholder-image"
             height="413" width="550"
-            src="../resources/img_soon.jpg"
-            alt="placeholder-image"
+            ng-src={{myRecord.image.full}}
+            alt="Image of {{myRecord.firstName}}"
             ng-click="pickImage()"/>
     </div>
 
@@ -15,7 +15,7 @@
             name="editRecordForm"
             ng-submit="updateRecord()"
             novalidate>
-        <h4>Fill in your directory profile</h4>
+        <h4>Update your directory profile</h4>
 
 <!-- Start First/Last Name row -------------------------------------------->
 
@@ -68,7 +68,6 @@
                         ng-model="myRecord.dateOfBirth"
                         min="1917-01-01"
                         placeholder=" yyyy-mm-dd"
-                        value="1987-10-09"
                         required />
             </div>
           </div>
@@ -127,7 +126,7 @@
                         id="text-yes"
                         name="textCapable"
                         ng-model="myRecord.phone.textCapable"
-                        value="true"
+                        ng-value="true"
                         required /> Y
               </label>
               <label class="radio-inline">
@@ -135,7 +134,7 @@
                         id="text-no"
                         name="textCapable"
                         ng-model="myRecord.phone.textCapable"
-                        value="false"
+                        ng-value="false"
                         required /> N
               </label>
             </div>
@@ -278,7 +277,7 @@
                   class="btn brown-button"
                   value="Cancel"
                   ng-click="resetform()"
-                  ng-disabled="editRecordForm.$pristine">
+
         </div>
 
         <div class="row">

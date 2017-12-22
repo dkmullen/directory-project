@@ -72,5 +72,9 @@ module.exports = {
   // The only purpose of this is load the page under checktoken in routes.js
   loadAddPage(req, res) {
     res.send();
+  },
+  
+  loadUpdatePage(req, res) {
+    res.send();
   }
 };

@@ -50,6 +50,114 @@
       });
     }])
 
+  .controller('UpdateRecordController', [ '$scope', '$http', '$log', '$location', '$timeout', '$window',
+    function($scope, $http, $log, $location, $timeout, $window) {
+      // Load the page and check for a token from MemberController on the back-end
+      $http.get('/add', {
+        headers: { 'x-access-token': $window.sessionStorage.token }
+      })
+      .catch((err) => {
+        if(err.status === 401) {
+          $location.url('/login');        }
+        else {
+          $log.error('Unknown error from EditRecordController - Status: ' + err.status);
+        }
+      });
+
+      function populateRecord() {
+        $http({
+          method: 'GET',
+          url: 'members/me',
+          headers : {
+            'Content-Type': 'application/json',
+              'x-access-token': $window.sessionStorage.token
+          }
+        })
+        .then((data) => {
+          let my = data.data;
+          if (Object.keys(my).length === 0) { // ie, if object is empty
+            console.log('redirect');
+          } else {
+            let myRecord = {
+              firstName: my.firstName || '',
+              lastName: my.lastName || '',
+              // dateOfBirth: my.dateOfBirth || '',
+              email: my.email || '',
+              phone: {
+                phoneNumber: my.phone.phoneNumber || '',
+                // textCapable: my.phone.textCapable || ''
+              },
+              address: {
+                streetOne: my.address.streetOne || '',
+                streetTwo: my.address.streetTwo || '',
+                city: my.address.city || '',
+                state: my.address.state,
+                zip: my.address.zip || ''
+              },
+              _id: my._id
+            };
+            $scope.myRecord = myRecord;
+          }
+        })
+        .catch((err) => {
+          if(err.status === 401) {
+            $location.url('/login');
+          } else {
+            $log.error('Unknown error from EditRecordController on loading record - ' + err);
+          }
+        });
+      }
+
+      populateRecord();
+      $scope.resetform = () => {
+        $scope.myRecord = populateRecord();
+      };
+
+      // Got this from: http://jsfiddle.net/mHVWp/
+      $scope.pickImage = () => {
+        let input = $(document.createElement('input'));
+        input.attr("type", "file");
+        input.trigger('click');
+        return false;
+      };
+
+      $scope.successmessage = false;
+      $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
+      $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
+
+      // Add a new member to the DB from add-record view
+      $scope.updateRecord = () => {
+        $http({
+          method: 'PUT',
+          url: 'members/' + $scope.myRecord._id,
+          data: $scope.myRecord,
+          headers : {
+            'Content-Type': 'application/json',
+              'x-access-token': $window.sessionStorage.token
+          }
+        })
+        .then((data) => {
+          $scope.myRecord = populateRecord();
+          $scope.successmessage = true;
+          $timeout(() => {
+            /* We use 'apply' to add this to the watchlist so the view
+            updates when this model updates. This causes the success message to
+            appear for 3 seconds after user posts, then disapper. */
+            $scope.$apply(() => {
+              $scope.successmessage = false;
+            });
+          }, 3000);
+        })
+        .catch((err) => {
+          // Might as well check again for a token before submitting the data
+          if(err.status === 401) {
+            $location.url('/login');
+          } else {
+            $log.error('Unknown error from UpdateRecordController ' + err);
+          }
+        });
+      };
+  }])
   .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$location', '$timeout', '$window',
     function($scope, $http, $log, $location, $timeout, $window) {
       // Load the page and check for a token from MemberController on the back-end
@@ -75,36 +183,54 @@
         })
         .then((data) => {
           let my = data.data;
-          console.log(my.dateOfBirth || 'fail', my.phone.textCapable);
-          if (my === {}) {
-            console.log('whatevs');
-          } else {
+          console.log(my);
+          if (Object.keys(my).length === 0) { // ie, if object is empty
             let myRecord = {
-              firstName: my.firstName || '',
-              lastName: my.lastName || '',
-              dateOfBirth: my.dateOfBirth || '',
-              email: my.email || '',
+              firstName: '',
+              lastName: '',
+              // dateOfBirth: '',
+              email: '',
               phone: {
-                phoneNumber: my.phone.phoneNumber || '',
-                textCapable: my.phone.textCapable || ''
+                phoneNumber: '',
+                textCapable: ''
               },
               address: {
-                streetOne: my.address.streetOne || '',
-                streetTwo: my.address.streetTwo || '',
-                city: my.address.city || '',
-                state: my.address.state,
-                zip: my.address.zip || ''
+                streetOne: '',
+                streetTwo: '',
+                city: '',
+                state: 'TN',
+                zip: ''
                 }
               };
               $scope.newRecord = myRecord;
+          } else {
+          let myRecord = {
+            firstName: my.firstName || '',
+            lastName: my.lastName || '',
+            // dateOfBirth: my.dateOfBirth || '',
+            email: my.email || '',
+            phone: {
+              phoneNumber: my.phone.phoneNumber || '',
+              // textCapable: my.phone.textCapable || ''
+            },
+            address: {
+              streetOne: my.address.streetOne || '',
+              streetTwo: my.address.streetTwo || '',
+              city: my.address.city || '',
+              state: my.address.state,
+              zip: my.address.zip || ''
+              }
+            };
+            $scope.newRecord = myRecord;
           }
+
         })
         .catch((err) => {
           // Might as well check again for a token before submitting the data
           if(err.status === 401) {
             $location.url('/login');
           } else {
-            $log.error('Unknown error from PostNewRecordController');
+            $log.error('Unknown error from PostNewRecordController on loading record - ' + err);
           }
         });
       }

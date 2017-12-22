@@ -80,28 +80,27 @@
             console.log('redirect');
           } else {
             let myRecord = {
-              firstName: my.firstName || '',
-              lastName: my.lastName || '',
+              firstName: my.firstName,
+              lastName: my.lastName,
               dateOfBirth: new Date(my.dateOfBirth),
-              email: my.email || '',
+              email: my.email,
               phone: {
-                phoneNumber: my.phone.phoneNumber || '',
-                textCapable: my.phone.textCapable || ''
+                phoneNumber: my.phone.phoneNumber,
+                textCapable: my.phone.textCapable
               },
               address: {
-                streetOne: my.address.streetOne || '',
-                streetTwo: my.address.streetTwo || '',
-                city: my.address.city || '',
-                state: my.address.state || 'TN',
-                zip: my.address.zip || ''
+                streetOne: my.address.streetOne,
+                streetTwo: my.address.streetTwo,
+                city: my.address.city,
+                state: my.address.state,
+                zip: my.address.zip
               },
               _id: my._id,
               image: {
-                full: my.image.full || '',
-                thumb: my.image.thumb || ''
+                full: my.image.full,
+                thumb: my.image.thumb
               }
             };
-            console.log(myRecord);
             $scope.myRecord = myRecord;
           }
         })
@@ -115,10 +114,6 @@
       }
 
       populateRecord();
-
-      // $scope.resetform = () => {
-      //   $scope.myRecord = populateRecord();
-      // };
 
       $scope.cancel = () => {
         $location.url('/member' + $scope.myRecord._id);

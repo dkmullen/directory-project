@@ -42,22 +42,22 @@
       }
     })
 
-    // .state('addnew', {
-    //   url: '/add',
-    //   views: {
-    //     'header': {
-    //       templateUrl: '/views/header.html',
-    //       controller: 'NavController'
-    //     },
-    //     'content': {
-    //       templateUrl: '/views/add-record.html',
-    //       //controller: 'PostNewRecordController'
-    //     },
-    //     'footer': {
-    //       templateUrl: '/views/footer.html'
-    //     }
-    //   }
-    // })
+    .state('addnew', {
+      url: '/add',
+      views: {
+        'header': {
+          templateUrl: '/views/header.html',
+          controller: 'NavController'
+        },
+        'content': {
+          templateUrl: '/views/add-record.html',
+          //controller: 'PostNewRecordController'
+        },
+        'footer': {
+          templateUrl: '/views/footer.html'
+        }
+      }
+    })
 
     .state('updateme', {
       url: '/update',

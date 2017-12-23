@@ -52,13 +52,13 @@
 
   .controller('UpdateRecordController', [ '$scope', '$http', '$log', '$location', '$timeout', '$window',
     function($scope, $http, $log, $location, $timeout, $window) {
-      // Load the page and check for a token from MemberController on the back-end
+
       $http.get('/update', {
         headers: { 'x-access-token': $window.sessionStorage.token }
       })
       .catch((err) => {
         if(err.status === 401) {
-          $location.url('/login');        }
+          return $location.url('/login');        }
         else {
           $log.error('Unknown error from EditRecordController - Status: ' + err.status);
         }
@@ -75,9 +75,8 @@
         })
         .then((data) => {
           let my = data.data;
-          console.log(my);
           if (Object.keys(my).length === 0) { // ie, if object is empty
-            console.log('redirect');
+            return $location.url('/add');
           } else {
             let myRecord = {
               firstName: my.firstName,
@@ -155,134 +154,117 @@
         });
       };
   }])
+
   .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$location', '$timeout', '$window',
     function($scope, $http, $log, $location, $timeout, $window) {
-      // Load the page and check for a token from MemberController on the back-end
-      $http.get('/add', {
-        headers: { 'x-access-token': $window.sessionStorage.token }
+
+    // Load the page and check for a token from MemberController on the back-end
+    $http.get('/add', {
+      headers: { 'x-access-token': $window.sessionStorage.token }
+    })
+    .catch((err) => {
+      if(err.status === 401) {
+        $location.url('/login');
+      } else {
+        $log.error('Unknown error from PostNewRecordController - Status: ' + err.status);
+      }
+    });
+
+    function clearRecord() {
+      $http({
+        method: 'GET',
+        url: 'users/me',
+        headers : {
+          'Content-Type': 'application/json',
+            'x-access-token': $window.sessionStorage.token
+        }
+      })
+      .then((user) => {
+        let myRecord = {
+          firstName: '',
+          lastName: '',
+          dateOfBirth: '',
+          email: '',
+          phone: {
+            phoneNumber: '',
+            textCapable: ''
+          },
+          address: {
+            streetOne: '',
+            streetTwo: '',
+            city: '',
+            state: 'TN',
+            zip: ''
+          },
+          _creator: user.data._id
+        };
+        $scope.newRecord = myRecord;
       })
       .catch((err) => {
         if(err.status === 401) {
-          $location.url('/login');        }
-        else {
-          $log.error('Unknown error from PostNewRecordController - Status: ' + err.status);
+          $location.url('/login');
+        } else {
+          $log.error('Unknown error from PostNewRecordController on clearing record - ' + err);
         }
       });
+    }
 
-      function clearRecord() {
-        $http({
-          method: 'GET',
-          url: 'members/me',
-          headers : {
-            'Content-Type': 'application/json',
-              'x-access-token': $window.sessionStorage.token
-          }
-        })
-        .then((data) => {
-          let my = data.data;
-          console.log(my);
-          if (Object.keys(my).length === 0) { // ie, if object is empty
-            let myRecord = {
-              firstName: '',
-              lastName: '',
-              // dateOfBirth: '',
-              email: '',
-              phone: {
-                phoneNumber: '',
-                textCapable: ''
-              },
-              address: {
-                streetOne: '',
-                streetTwo: '',
-                city: '',
-                state: 'TN',
-                zip: ''
-                }
-              };
-              $scope.newRecord = myRecord;
-          } else {
-          let myRecord = {
-            firstName: my.firstName || '',
-            lastName: my.lastName || '',
-            // dateOfBirth: my.dateOfBirth || '',
-            email: my.email || '',
-            phone: {
-              phoneNumber: my.phone.phoneNumber || '',
-              // textCapable: my.phone.textCapable || ''
-            },
-            address: {
-              streetOne: my.address.streetOne || '',
-              streetTwo: my.address.streetTwo || '',
-              city: my.address.city || '',
-              state: my.address.state,
-              zip: my.address.zip || ''
-              }
-            };
-            $scope.newRecord = myRecord;
-          }
+    clearRecord();
 
-        })
-        .catch((err) => {
-          // Might as well check again for a token before submitting the data
-          if(err.status === 401) {
-            $location.url('/login');
-          } else {
-            $log.error('Unknown error from PostNewRecordController on loading record - ' + err);
-          }
-        });
-      }
+    // For the reset button...
+    $scope.clearform = () => {
+      $scope.newRecord = clearRecord();
+      $scope.newRecordForm.$setPristine();
+    };
 
-      clearRecord();
-      $scope.clearform = () => {
+    // Got this from: http://jsfiddle.net/mHVWp/
+    $scope.pickImage = () => {
+      let input = $(document.createElement('input'));
+      input.attr("type", "file");
+      input.trigger('click');
+      return false;
+    };
+
+    $scope.successmessage = false;
+    $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
+    $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
+
+    // Add a new member to the DB from add-record view
+    $scope.saveNewRecord = () => {
+      $http({
+        method: 'POST',
+        url: 'members',
+        data: $scope.newRecord,
+        headers : {
+          'Content-Type': 'application/json',
+            'x-access-token': $window.sessionStorage.token
+        }
+      })
+      .then((data) => {
         $scope.newRecord = clearRecord();
-        // $scope.newRecordForm.$setPristine();
-      };
-
-      // Got this from: http://jsfiddle.net/mHVWp/
-      $scope.pickImage = () => {
-        let input = $(document.createElement('input'));
-        input.attr("type", "file");
-        input.trigger('click');
-        return false;
-      };
-
-      $scope.successmessage = false;
-      $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
-      $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
-
-      // Add a new member to the DB from add-record view
-      $scope.saveNewRecord = () => {
-        $http({
-          method: 'POST',
-          url: 'members',
-          data: $scope.newRecord,
-          headers : {
-            'Content-Type': 'application/json',
-              'x-access-token': $window.sessionStorage.token
-          }
-        })
-        .then((data) => {
-          $scope.newRecord = clearRecord();
-          // $scope.newRecordForm.$setPristine();
-          $scope.successmessage = true;
-          $timeout(() => {
-            /* We use 'apply' to add this to the watchlist so the view
-            updates when this model updates. This causes the success message to
-            appear for 3 seconds after user posts, then disapper. */
-            $scope.$apply(() => {
-              $scope.successmessage = false;
-            });
-          }, 3000);
-        })
-        .catch((err) => {
-          // Might as well check again for a token before submitting the data
-          if(err.status === 401) {
-            $location.url('/login');
-          } else {
-            $log.error('Unknown error from PostNewRecordController');
-          }
-        });
-      };
+        $scope.newRecordForm.$setPristine();
+        $scope.successmessage = true;
+        $timeout(() => {
+          /* We use 'apply' to add this to the watchlist so the view
+          updates when this model updates. This causes the success message to
+          appear for 3 seconds after user posts, then disapper. */
+          $scope.$apply(() => {
+            $scope.successmessage = false;
+          });
+        }, 3000);
+      })
+      .then(() => {
+        return $location.url('/');
+      })
+      .catch((err) => {
+        // Might as well check again for a token before submitting the data
+        if(err.status === 401) {
+          $location.url('/login');
+        } else {
+          $log.error('Unknown error from PostNewRecordController' + err);
+        }
+      });
+    };
   }])
 
   // Determines which page we are on so nav pill can be highlighted accordingly

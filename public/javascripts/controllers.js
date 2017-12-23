@@ -24,7 +24,7 @@
         if(err.status === 401) {
           $location.url('/login'); //redirect to /login view
         } else {
-          $log.error('Err from MemberListController' + err);
+          $log.error('Err from MemberListController ' + err);
         }
       });
   }])
@@ -220,7 +220,7 @@
       });
     }
 
-    clearRecord();
+clearRecord();
 
     // For the reset button...
     $scope.clearform = () => {
@@ -396,7 +396,7 @@
     };
   }])
 
-  .factory('authInterceptor', function($rootScope, $q, $window) {
+  .factory('authInterceptor', function($rootScope, $q, $location, $window) {
     return {
       request: (config) => {
         config.headers = config.headers || {};

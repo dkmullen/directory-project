@@ -78,6 +78,7 @@ module.exports = {
             success: true,
             message: 'Enjoy your token!',
             token: token,
+            id: user._id
           });
         }
       }

@@ -190,15 +190,6 @@
         if (Object.keys(member.data).length !== 0) { // ie, if object is not empty
           return $location.url('/update');
         } else {
-          $http({ // This is simply to get the user id. Maybe should store it earlier
-            method: 'GET',
-            url: 'users/me',
-            headers : {
-              'Content-Type': 'application/json',
-                'x-access-token': $window.sessionStorage.token
-            }
-          })
-          .then((user) => {
             let myRecord = {
               firstName: '',
               lastName: '',
@@ -215,24 +206,16 @@
                 state: 'TN',
                 zip: ''
               },
-              _creator: user.data._id
+              _creator: $window.sessionStorage.id
             };
             $scope.newRecord = myRecord;
-          })
-          .catch((err) => {
-            if(err.status === 401) {
-              $location.url('/login');
-            } else {
-              $log.error('Err from PostNewRecordController on clearing form - ' + err);
-            }
-          });
-        }
+          }
       })
       .catch((err) => {
         if(err.status === 401) {
           $location.url('/login');
         } else {
-          $log.error('Err from PostNewRecordController while running GET users/me ' + err);
+          $log.error('Err from PostNewRecordController on clearing form - ' + err);
         }
       });
     }
@@ -312,7 +295,9 @@
       .then(() => {
         $log.info('Ima out');
         delete $window.sessionStorage.token;
-        console.log('token is ' + $window.sessionStorage.token);
+        delete $window.sessionStorage.id;
+        console.log('token is ' + $window.sessionStorage.token +
+          ' and id is ' + $window.sessionStorage.id);
         $location.url('/login');
       })
       .catch((err) => {
@@ -354,20 +339,22 @@
           message: 'Success!',
           headers : { 'Content-Type': 'application/json' },
         })
-        .then((data) => {
-          if(data.data.success === true) {
-            $window.sessionStorage.token = data.data.token;
+        .then((user) => {
+          if(user.data.success === true) {
+            $window.sessionStorage.token = user.data.token;
+            $window.sessionStorage.id = user.data.id;
             $scope.isAuthenticated = true;
-            const encodedProfile = data.data.token.split('.')[1];
+            const encodedProfile = user.data.token.split('.')[1];
             const profile = JSON.parse(url_base64_decode(encodedProfile));
             $location.url('/');
           } else {
-            $scope.errorMessage = data.data.message;
+            $scope.errorMessage = user.data.message;
           }
         })
         .catch((err) => {
           //Erase the token on failure to log in
           delete $window.sessionStorage.token;
+          console.log('err');
           $scope.errorMessage = 'The server is not responding. Please try again';
         });
       };

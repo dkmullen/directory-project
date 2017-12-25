@@ -43,6 +43,11 @@
       })
       .then((data) => {
         record.member = data;
+        let myPhone = data.data.phone.phoneNumber;
+        let myNumber = myPhone.slice(0,3) + '-' +
+              myPhone.slice(3,6) + '-' +
+              myPhone.slice(6,10);
+        document.getElementById('phone').append(myNumber); // What's the Angular way?
       })
       .catch((err) => {
         // Check for a token from MemberController on the back-end
@@ -88,8 +93,10 @@
               lastName: my.lastName,
               dateOfBirth: new Date(my.dateOfBirth),
               email: my.email,
-              phone: {
-                phoneNumber: my.phone.phoneNumber,
+              phone: { // insert some dashes for readability
+                phoneNumber: my.phone.phoneNumber.slice(0,3) + '-' +
+                  my.phone.phoneNumber.slice(3,6) + '-' +
+                  my.phone.phoneNumber.slice(6,10),
                 textCapable: my.phone.textCapable
               },
               address: {
@@ -138,6 +145,8 @@
       $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
 
       $scope.updateRecord = () => {
+        // Strip out non-numerics before saving phone number
+        $scope.myRecord.phone.phoneNumber = $scope.myRecord.phone.phoneNumber.replace(/\D/g,'');
         $http({
           method: 'PUT',
           url: 'members/' + $scope.myRecord._id,
@@ -242,6 +251,7 @@ clearRecord();
     $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
 
     $scope.saveNewRecord = () => {
+      $scope.myRecord.phone.phoneNumber = $scope.myRecord.phone.phoneNumber.replace(/\D/g,'');
       $http({
         method: 'POST',
         url: 'members',

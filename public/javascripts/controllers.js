@@ -251,7 +251,7 @@ clearRecord();
     $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
 
     $scope.saveNewRecord = () => {
-      $scope.myRecord.phone.phoneNumber = $scope.myRecord.phone.phoneNumber.replace(/\D/g,'');
+      $scope.newRecord.phone.phoneNumber = $scope.newRecord.phone.phoneNumber.replace(/\D/g,'');
       $http({
         method: 'POST',
         url: 'members',

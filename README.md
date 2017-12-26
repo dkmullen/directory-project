@@ -6,7 +6,6 @@ I began developing this directory app for [Coursera's Full Stack Web Development
 To install, clone the repository, install the dependencies with npm, install and run [Mongo](https://www.mongodb.com/download-center?jmp=nav#community) locally and open `localhost:3000` in the browser and it should work. There is a little data (`some-data.json`) that conforms to the schema to get you started.
 
 TODO (as of December 25, 2017)
-- xxx Handle phone and text buttons
 - Enable photo uploading
 - Enable record-by-record scanning in detail-view
 - Expand schema to group members by household rather than only by individual

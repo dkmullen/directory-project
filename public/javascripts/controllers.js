@@ -134,7 +134,8 @@
       // Got this from: http://jsfiddle.net/mHVWp/
       $scope.pickImage = () => {
         let input = $(document.createElement('input'));
-        input.attr("type", "file");
+        input.attr('type', 'file');
+        input.attr('accept', '.jpg, .png, .gif, .jpeg');
         input.trigger('click');
         return false;
       };
@@ -229,7 +230,7 @@
       });
     }
 
-clearRecord();
+    clearRecord();
 
     // For the reset button...
     $scope.clearform = () => {

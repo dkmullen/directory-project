@@ -1,12 +1,13 @@
 <div ng-controller="UpdateRecordController as update">
   <div class="row">
     <div class="col-xs-12 col-md-8 first-column">
-      <input type="image"
+      <img
             class="img-responsive placeholder-image"
             height="413" width="550"
             ng-src={{myRecord.image.full}}
             alt="Image of {{myRecord.firstName}}"
             ng-click="pickImage()"/>
+      <input type="file" name="profile_pic" accept=".jpg, .png, .gif, .jpeg" />
     </div>
 
     <div class="col-xs-12 col-md-4 second-column">

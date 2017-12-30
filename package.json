@@ -12,6 +12,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.17.1",
     "bootstrap": "^3.3.7",
+    "cloudinary": "^1.9.1",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "jquery-slim": "^3.0.0",

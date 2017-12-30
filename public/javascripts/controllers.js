@@ -134,9 +134,11 @@
       // Got this from: http://jsfiddle.net/mHVWp/
       $scope.pickImage = () => {
         let input = $(document.createElement('input'));
+        let myFile = input.files;
         input.attr('type', 'file');
         input.attr('accept', '.jpg, .png, .gif, .jpeg');
         input.trigger('click');
+        console.log(myFile);
         return false;
       };
 

@@ -285,7 +285,26 @@
         }
       });
     };
+
+    $scope.postPhoto = () => {
+      $http({
+        method: 'POST',
+        url: '/members/photos',
+        headers : {
+          'Content-Type': 'application/json',
+            'x-access-token': $window.sessionStorage.token
+        }
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    };
+
   }])
+
 
   // Nav bar related functions
   .controller('NavController', ['$scope', '$http', '$state', '$window', '$log', '$location',

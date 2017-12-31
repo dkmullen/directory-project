@@ -23,6 +23,8 @@ module.exports = (app) => {
   app.delete('/members/:id', MemberController.delete);
   app.delete('/users/me/token', UserController.deletetoken);
 
+  app.post('/members/photos', MemberController.postphoto);
+
   app.get('/users/me', UserController.getme);
 
   app.get('/users', UserController.getallusers);

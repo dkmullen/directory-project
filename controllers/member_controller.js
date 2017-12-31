@@ -1,5 +1,6 @@
 /*jshint esversion: 6 */
 /* This backend file extends route.js, defines the jobs each route requires. */
+const cloudinary = require('cloudinary');
 
 const Member = require('../models/member'),
   User = require('../models/user');
@@ -40,6 +41,12 @@ module.exports = {
    });
   },
 
+  //Post a photo
+  postphoto(req, res, next) {
+    console.log(req);
+    res.send();
+  },
+
   // Create a new record
   create(req, res, next) {
     console.log(req.body);
@@ -73,7 +80,7 @@ module.exports = {
   loadAddPage(req, res) {
     res.send();
   },
-  
+
   loadUpdatePage(req, res) {
     res.send();
   }

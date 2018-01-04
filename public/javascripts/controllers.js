@@ -289,14 +289,15 @@
     $scope.postPhoto = () => {
       $http({
         method: 'POST',
-        url: '/members/photos',
+        url: 'members/photos',
+        file: '/home/dkm/Desktop/jocko250.jpg',
         headers : {
           'Content-Type': 'application/json',
             'x-access-token': $window.sessionStorage.token
         }
       })
       .then((data) => {
-        console.log(data);
+        $log.info(data);
       })
       .catch((err) => {
         console.log(err);

@@ -3,7 +3,8 @@
 const cloudinary = require('cloudinary');
 
 const Member = require('../models/member'),
-  User = require('../models/user');
+  User = require('../models/user'),
+  config = require('../config');
 
 module.exports = {
 
@@ -42,9 +43,15 @@ module.exports = {
   },
 
   //Post a photo
-  postphoto(req, res, next) {
+  postphoto(req, res) {
     console.log(req);
     res.send();
+    // cloudinary.uploader.upload('/home/dkm/Desktop/jocko250.jpg', function(result) {
+    // res.send(result.url);
+    // })
+    // .catch((e) => {
+    //   res.status(400).send(e);
+    // });
   },
 
   // Create a new record

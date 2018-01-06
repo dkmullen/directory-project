@@ -4,7 +4,8 @@
       <input type="image"
             class="img-responsive placeholder-image"
             height="413" width="550"
-            src="../resources/img_soon.jpg"
+            data-ng-model=myPicture
+            ng-src="{{myPicture}}"
             alt="placeholder-image"
             ng-click="cloudinaryWidget()"/>
     </div>

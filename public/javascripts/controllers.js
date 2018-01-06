@@ -286,22 +286,18 @@
       });
     };
 
-    $scope.postPhoto = () => {
-      $http({
-        method: 'POST',
-        url: 'members/photos',
-        file: '/home/dkm/Desktop/jocko250.jpg',
-        headers : {
-          'Content-Type': 'application/json',
-            'x-access-token': $window.sessionStorage.token
+    let widget = cloudinary.createUploadWidget({ upload_preset: 'j5glie9m' },
+      function(error, result) {
+        if (error) {
+          console.log(error);
+        } else {
+          let x = result[0].secure_url;
+          console.log(x);
         }
-      })
-      .then((data) => {
-        $log.info(data);
-      })
-      .catch((err) => {
-        console.log(err);
       });
+
+    $scope.cloudinaryWidget = () => {
+      widget.open();
     };
 
   }])

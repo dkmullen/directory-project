@@ -42,18 +42,6 @@ module.exports = {
    });
   },
 
-  //Post a photo
-  postphoto(req, res) {
-    console.log(req);
-    res.send();
-    // cloudinary.uploader.upload('/home/dkm/Desktop/jocko250.jpg', function(result) {
-    // res.send(result.url);
-    // })
-    // .catch((e) => {
-    //   res.status(400).send(e);
-    // });
-  },
-
   // Create a new record
   create(req, res, next) {
     console.log(req.body);

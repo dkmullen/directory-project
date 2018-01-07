@@ -20,7 +20,7 @@ module.exports = {
     'secret' : process.env.JWT_SECRET,
     'mongoUrl' : process.env.MONGODB_URI
 };
-// To start mongo on Windows - "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe"
+// To start mongo on Windows - "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe"
 
 /*
 let env ... if Node is running on my machine, it automatically chooses 'development'(?)

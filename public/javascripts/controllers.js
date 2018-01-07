@@ -176,6 +176,7 @@
   .controller('PostNewRecordController', [ '$scope', '$http', '$log', '$location', '$timeout', '$window',
     function($scope, $http, $log, $location, $timeout, $window) {
 
+    $scope.myPicture = '../resources/img_soon.jpg';
     // Load the page and check for a token from MemberController on the back-end
     $http.get('/add', {
       headers: { 'x-access-token': $window.sessionStorage.token }
@@ -218,10 +219,13 @@
                 state: 'TN',
                 zip: ''
               },
+              image: {
+                full: $scope.myPicture,
+                thumb: $scope.myPicture
+              },
               _creator: $window.sessionStorage.id
             };
             $scope.newRecord = myRecord;
-            $scope.myPicture = '../resources/img_soon.jpg';
           }
       })
       .catch((err) => {

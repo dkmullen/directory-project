@@ -258,39 +258,6 @@
     $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
     $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
 
-    $scope.saveNewRecord = () => {
-      $scope.newRecord.phone.phoneNumber = $scope.newRecord.phone.phoneNumber.replace(/\D/g,'');
-      $http({
-        method: 'POST',
-        url: 'members',
-        data: $scope.newRecord,
-        headers : {
-          'Content-Type': 'application/json',
-            'x-access-token': $window.sessionStorage.token
-        }
-      })
-      .then((data) => {
-        $scope.successmessage = true;
-        $timeout(() => {
-          /* We use 'apply' to add this to the watchlist so the view
-          updates when this model updates. This causes the success message to
-          appear for 3 seconds after user posts, then disapper. */
-          $scope.$apply(() => {
-            $scope.successmessage = false;
-            $location.url('/');
-          });
-        }, 3000);
-      })
-      .catch((err) => {
-        // Might as well check again for a token before submitting the data
-        if(err.status === 401) {
-          $location.url('/login');
-        } else {
-          $log.error('Err from PostNewRecordController - POST /members' + err);
-        }
-      });
-    };
-
     let widget = cloudinary.createUploadWidget({
       upload_preset: 'j5glie9m',
       multiple: false,
@@ -325,6 +292,40 @@
       widget.open();
     };
 
+    $scope.saveNewRecord = () => {
+      $scope.newRecord.phone.phoneNumber = $scope.newRecord.phone.phoneNumber.replace(/\D/g,'');
+      $scope.newRecord.image.full = $scope.myPicture;
+      $scope.newRecord.image.thumb = $scope.myPicture;
+      $http({
+        method: 'POST',
+        url: 'members',
+        data: $scope.newRecord,
+        headers : {
+          'Content-Type': 'application/json',
+            'x-access-token': $window.sessionStorage.token
+        }
+      })
+      .then((data) => {
+        $scope.successmessage = true;
+        $timeout(() => {
+          /* We use 'apply' to add this to the watchlist so the view
+          updates when this model updates. This causes the success message to
+          appear for 3 seconds after user posts, then disapper. */
+          $scope.$apply(() => {
+            $scope.successmessage = false;
+            $location.url('/');
+          });
+        }, 3000);
+      })
+      .catch((err) => {
+        // Might as well check again for a token before submitting the data
+        if(err.status === 401) {
+          $location.url('/login');
+        } else {
+          $log.error('Err from PostNewRecordController - POST /members' + err);
+        }
+      });
+    };
   }])
 
 

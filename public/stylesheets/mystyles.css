@@ -41,6 +41,10 @@ header {
   margin-left: 30px;
   padding-bottom: 25px;
 }
+#changeimage {
+  text-align: center;
+  margin-top: -15px;
+}
 .info-form {
   text-align: center;
   margin-left: -25px;

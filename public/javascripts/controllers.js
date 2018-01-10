@@ -131,25 +131,50 @@
         $location.url('/member' + $scope.myRecord._id);
       };
 
-      // Got this from: http://jsfiddle.net/mHVWp/
-      $scope.pickImage = () => {
-        let input = $(document.createElement('input'));
-        let myFile = input.files;
-        input.attr('type', 'file');
-        input.attr('accept', '.jpg, .png, .gif, .jpeg');
-        input.trigger('click');
-        console.log(myFile);
-        return false;
-      };
-
       // These are used in the form to validate data
       $scope.successmessage = false;
       $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
       $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
 
+      // The Cloudinary widget
+      let widget = cloudinary.createUploadWidget({
+        upload_preset: 'j5glie9m',
+        multiple: false,
+        cropping: 'server',
+        cropping_aspect_ratio: 1.33,
+        theme: 'white',
+        stylesheet:
+         `#cloudinary-overlay {
+           background: rgba(100,0,0,0.7);
+         }
+         #cloudinary-navbar .source.active {
+            border-bottom: 6px solid rgb(249, 109, 22);
+          }
+          #cloudinary-widget .button, #cloudinary-widget .button.small_button {
+            background: rgb(249, 109, 22);
+          }
+          #cloudinary-widget .button:hover, #cloudinary-widget .button.small_button:hover, #cloudinary-widget .upload_button_holder:hover .button {
+            background: rgb(217, 98, 24);
+          }`
+      },
+        function(error, result) {
+          if (error) {
+            console.log(error);
+          } else {
+            $scope.myPicture = result[0].secure_url;
+          }
+        });
+
+      $scope.cloudinaryWidget = () => {
+        widget.open();
+      };
+
+
       $scope.updateRecord = () => {
         // Strip out non-numerics before saving phone number
         $scope.myRecord.phone.phoneNumber = $scope.myRecord.phone.phoneNumber.replace(/\D/g,'');
+        $scope.myRecord.image.full = $scope.myPicture;
+        $scope.myRecord.image.thumb = $scope.myPicture;
         $http({
           method: 'PUT',
           url: 'members/' + $scope.myRecord._id,
@@ -245,19 +270,12 @@
       $scope.newRecordForm.$setPristine();
     };
 
-    // Got this from: http://jsfiddle.net/mHVWp/
-    $scope.pickImage = () => {
-      let input = $(document.createElement('input'));
-      input.attr("type", "file");
-      input.trigger('click');
-      return false;
-    };
-
     // These are used in the form to validate data
     $scope.successmessage = false;
     $scope.phoneregex = '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}';
     $scope.zipregex = '\\d{5}([ \\-]\\d{4})?';
 
+    // The Cloudinary widget
     let widget = cloudinary.createUploadWidget({
       upload_preset: 'j5glie9m',
       multiple: false,
@@ -265,8 +283,7 @@
       cropping_aspect_ratio: 1.33,
       theme: 'white',
       stylesheet:
-       `
-       #cloudinary-overlay {
+       `#cloudinary-overlay {
          background: rgba(100,0,0,0.7);
        }
        #cloudinary-navbar .source.active {
@@ -277,8 +294,7 @@
         }
         #cloudinary-widget .button:hover, #cloudinary-widget .button.small_button:hover, #cloudinary-widget .upload_button_holder:hover .button {
           background: rgb(217, 98, 24);
-        }
-        `
+        }`
     },
       function(error, result) {
         if (error) {

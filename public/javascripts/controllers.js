@@ -60,8 +60,8 @@
     }])
 
   // Make changes to an existing member record
-  .controller('UpdateRecordController', [ '$scope', '$http', '$log', '$location', '$timeout', '$window',
-    function($scope, $http, $log, $location, $timeout, $window) {
+  .controller('UpdateRecordController', [ '$scope', 'cloudinaryWidgetService','$http', '$log', '$location', '$timeout', '$window',
+    function($scope, cloudinaryWidgetService, $http, $log, $location, $timeout, $window) {
 
       $http.get('/update', {
         headers: { 'x-access-token': $window.sessionStorage.token }

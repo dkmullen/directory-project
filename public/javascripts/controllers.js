@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 /* These front-end controllers make the requests necessary to build the pages */
 
-// (() => {
+(() => {
   angular.module('directoryApp') // this only retrieves the module, created in app.js
 
   .factory('widgetFactory', () => {
@@ -490,4 +490,4 @@
     return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
   }
 
-// })();
+})();

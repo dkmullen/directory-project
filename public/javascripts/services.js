@@ -3,7 +3,7 @@
 (() => {
   angular.module('directoryApp')
 
-  .factory('widgetFactory2', () => {
+  .factory('widgetFactory', () => {
     let widgetdata = {
       upload_preset: 'j5glie9m',
       multiple: false,

@@ -4,30 +4,6 @@
 (() => {
   angular.module('directoryApp') // this only retrieves the module, created in app.js
 
-  .factory('widgetFactory', () => {
-    let widgetdata = {
-      upload_preset: 'j5glie9m',
-      multiple: false,
-      cropping: 'server',
-      cropping_aspect_ratio: 1.33,
-      theme: 'white',
-      stylesheet:
-       `#cloudinary-overlay {
-         background: rgba(100,0,0,0.7);
-       }
-       #cloudinary-navbar .source.active {
-          border-bottom: 6px solid rgb(249, 109, 22);
-        }
-        #cloudinary-widget .button, #cloudinary-widget .button.small_button {
-          background: rgb(249, 109, 22);
-        }
-        #cloudinary-widget .button:hover, #cloudinary-widget .button.small_button:hover, #cloudinary-widget .upload_button_holder:hover .button {
-          background: rgb(217, 98, 24);
-        }`
-    };
-    return widgetdata;
-})
-
   // List all members
   .controller('MemberListController', [ '$http', '$log', '$location', '$window',
     function($http, $log, $location, $window) {

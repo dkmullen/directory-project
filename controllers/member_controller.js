@@ -7,7 +7,6 @@ const Member = require('../models/member'),
   config = require('../config');
 
 module.exports = {
-
   // Get all the records
   getall(req, res, next) {
     Member.find({}) // Find all members
@@ -27,19 +26,19 @@ module.exports = {
 
   // Get my Member record for editing on the Your Record view
   getme(req, res) {
-    User.findOne({token: req.headers['x-access-token']})
-    .then((user) => {
-      Member.findOne({ _creator: user._id })
-      .then((member) => {
-        res.send(member || {}); // if user doesn't have a record yet, return {}
+    User.findOne({ token: req.headers['x-access-token'] })
+      .then(user => {
+        Member.findOne({ _creator: user._id })
+          .then(member => {
+            res.send(member || {}); // if user doesn't have a record yet, return {}
+          })
+          .catch(e => {
+            res.status(400).send(e);
+          });
       })
-      .catch((e) => {
+      .catch(e => {
         res.status(400).send(e);
       });
-    })
-   .catch((e) => {
-     res.status(400).send(e);
-   });
   },
 
   // Create a new record

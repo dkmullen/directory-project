@@ -5,12 +5,10 @@ const express = require('express'),
   logger = require('morgan'),
   bodyParser = require('body-parser'),
   mongoose = require('mongoose'),
-
   config = require('./config'),
   routes = require('./routes/routes'),
   member = require('./models/member'),
   user = require('./models/user'),
-
   app = express();
 
 mongoose.connect(config.mongoUrl, { useMongoClient: true });
